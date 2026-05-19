@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physics Lab ⚛️ | Premium Simulation</title>
+  <meta name="description"
+    content="Mô phỏng vật lý tương tác — Ném xiên, Con lắc, Va chạm đàn hồi, Khí lý tưởng, Chu trình Carnot">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <link rel="stylesheet" href="style.css?v=6">
+</head>
+
+<body>
+
+  <!-- Abstract Glowing Background -->
+  <div class="bg-glow" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar glass-panel" id="sidebar">
+      <div class="brand">
+        <div class="brand-icon-wrap glow-cyan">
+          <span class="brand-icon">⚛️</span>
+        </div>
+        <div>
+          <div class="brand-title">Physics Lab</div>
+          <div class="brand-sub">Premium Edition</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <div class="nav-section">🔧 CƠ HỌC</div>
+        <button class="nav-btn active" data-exp="projectile">
+          <span class="nav-icon">🎯</span>
+          <span class="nav-label">Ném xiên</span>
+        </button>
+        <button class="nav-btn" data-exp="pendulum">
+          <span class="nav-icon">🕐</span>
+          <span class="nav-label">Con lắc đơn</span>
+        </button>
+        <button class="nav-btn" data-exp="collision">
+          <span class="nav-icon">💥</span>
+          <span class="nav-label">Va chạm đàn hồi</span>
+        </button>
+
+        <div class="nav-section">🔥 NHIỆT ĐỘNG HỌC</div>
+        <button class="nav-btn" data-exp="gas">
+          <span class="nav-icon">🫧</span>
+          <span class="nav-label">Khí lý tưởng</span>
+        </button>
+        <button class="nav-btn" data-exp="carnot">
+          <span class="nav-icon">♨️</span>
+          <span class="nav-label">Chu trình Carnot</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="credit">TIEN VAN MAN · PHYS 101</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+      <!-- Topbar -->
+      <div class="topbar glass-panel">
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="topbar-info">
+          <h1 id="expTitle">
+            <span class="title-icon">🎯</span> <span class="gradient-text">Ném xiên</span>
+          </h1>
+          <p id="expSubtitle" class="subtitle">Chuyển động ném xiên trong trọng trường đều.</p>
+        </div>
+        <div class="topbar-actions">
+          <div class="speed-control">
+            <label for="speedSlider">⚡ Tốc độ</label>
+            <input type="range" id="speedSlider" min="0.1" max="5" step="0.1" value="1" class="neon-slider">
+            <span id="speedValue" class="speed-badge">1.0×</span>
+          </div>
+          <button class="action-btn btn-neon-purple" id="btnPause">
+            <span id="pauseIcon" style="font-family: 'JetBrains Mono', monospace;">||</span>
+            <span id="pauseText">Tạm dừng</span>
+          </button>
+          <button class="action-btn btn-neon-red" id="btnReset">
+            <span style="font-family: 'JetBrains Mono', monospace;">↺</span> Đặt lại
+          </button>
+        </div>
+      </div>
+
+      <!-- Workspace -->
+      <div class="workspace">
+
+        <!-- Control Panel -->
+        <div class="control-panel glass-panel" id="controlPanel">
+          <div class="panel-title">📐 LÝ THUYẾT & CÔNG THỨC</div>
+          <div class="equation-box glow-box" id="equationBox"></div>
+
+          <div class="panel-title">🎛️ THÔNG SỐ ĐẦU VÀO</div>
+          <div class="params-list" id="paramsList"></div>
+
+          <div class="panel-title">📊 KẾT QUẢ MÔ PHỎNG</div>
+          <div class="stats-box" id="statsBox"></div>
+
+          <div class="theory-box" id="theoryBox"></div>
+        </div>
+
+        <!-- Monitor / Visualization -->
+        <div class="viz-panel">
+          <!-- Glass Canvas Frame -->
+          <div class="glass-canvas-wrap glow-panel">
+            <div class="canvas-header">
+              <div class="window-controls">
+                <span class="dot dot-r"></span>
+                <span class="dot dot-y"></span>
+                <span class="dot dot-g"></span>
+              </div>
+              <div class="canvas-title" id="monitorTitle">SIMULATION ENGINE</div>
+              <div class="window-controls-placeholder"></div>
+            </div>
+            <div class="canvas-container">
+              <canvas id="canvas"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="app.js?v=3"></script>
+</body>
+
+</html>
