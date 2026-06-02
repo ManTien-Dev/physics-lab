@@ -1,6 +1,7 @@
 // ═══════════════════════════════════════════════════
-// PHÒNG THÍ NGHIỆM VẬT LÝ ĐẠI CƯƠNG
-// Mô phỏng chính xác – nghiệm giải tích & RK4
+// PHÒNG THÍ NGHIỆM VẬT LÝ ĐẠI CƯƠNG (PHYS 101)
+// Thiết kế: SaaS Bento Grid Edition
+// Tác giả: TIEN VAN MAN
 // ═══════════════════════════════════════════════════
 
 // ── Cấu hình thí nghiệm ──
@@ -10,97 +11,92 @@ const EXPERIMENTS = {
     subtitle: 'Nghiệm giải tích – quỹ đạo parabol chính xác',
     latex: 'y = x\\tan\\alpha - \\dfrac{gx^2}{2v_0^2\\cos^2\\alpha}',
     params: [
-      { key: 'angle', label: 'α', unit: '°', min: 5, max: 85, step: 1, val: 45, color: '#f59e0b' },
-      { key: 'v0', label: 'v₀', unit: 'm/s', min: 5, max: 60, step: 1, val: 30, color: '#6c8cff' },
-      { key: 'gravity', label: 'g', unit: 'm/s²', min: 1, max: 20, step: 0.1, val: 9.8, color: '#34d399' }
+      { key: 'angle', label: 'α', unit: '°', min: 5, max: 85, step: 1, val: 45, color: '#F59E0B' },
+      { key: 'v0', label: 'v₀', unit: 'm/s', min: 5, max: 60, step: 1, val: 30, color: '#6366F1' },
+      { key: 'gravity', label: 'g', unit: 'm/s²', min: 1, max: 20, step: 0.1, val: 9.8, color: '#10B981' }
     ],
-    theory: `<div class="theory-title">📖 Lý thuyết</div>
-      <p>Chuyển động ném xiên là tổ hợp của chuyển động <b>thẳng đều</b> theo phương ngang và <b>rơi tự do</b> theo phương đứng.</p>
+    theory: `<p>Chuyển động ném xiên là tổ hợp của chuyển động <b>thẳng đều</b> theo phương ngang và <b>rơi tự do</b> theo phương đứng.</p>
       <p class="formula-label">Phương trình chuyển động:</p>
-      <div class="formula">x(t) = v₀ · cos(α) · t</div>
-      <div class="formula">y(t) = v₀ · sin(α) · t − ½g · t²</div>
-      <p class="formula-label">Tầm bay xa:</p>
-      <div class="formula">R = v₀² · sin(2α) / g</div>
-      <p class="formula-label">Độ cao cực đại:</p>
-      <div class="formula">H = v₀² · sin²(α) / (2g)</div>
-      <p>Quỹ đạo là một <b>parabol</b>. Tầm xa cực đại đạt khi <b>α = 45°</b>.</p>`
+      <div class="formula">$$x(t) = v_0 \\cos(\\alpha) t$$</div>
+      <div class="formula">$$y(t) = v_0 \\sin(\\alpha) t - \\frac{1}{2}gt^2$$</div>
+      <p class="formula-label">Tầm bay xa (R):</p>
+      <div class="formula">$$R = \\frac{v_0^2 \\sin(2\\alpha)}{g}$$</div>
+      <p class="formula-label">Độ cao cực đại (H):</p>
+      <div class="formula">$$H = \\frac{v_0^2 \\sin^2(\\alpha)}{2g}$$</div>
+      <p>Quỹ đạo chuyển động là một đường <b>parabol</b>. Tầm xa cực đại đạt được khi góc bắn $\\alpha = 45^\\circ$.</p>`
   },
   pendulum: {
     title: 'Con lắc đơn',
-    subtitle: 'Tích phân Runge-Kutta bậc 4 – chính xác góc lớn',
+    subtitle: 'Tích phân Runge-Kutta bậc 4 (RK4) phi tuyến',
     latex: '\\ddot{\\theta} = -\\dfrac{g}{L}\\sin\\theta',
     params: [
-      { key: 'length', label: 'L', unit: 'm', min: 0.2, max: 3, step: 0.1, val: 1.5, color: '#f59e0b' },
-      { key: 'gravity', label: 'g', unit: 'm/s²', min: 1, max: 20, step: 0.1, val: 9.8, color: '#34d399' },
-      { key: 'amplitude', label: 'θ₀', unit: '°', min: 5, max: 170, step: 1, val: 45, color: '#6c8cff' }
+      { key: 'length', label: 'L', unit: 'm', min: 0.2, max: 3, step: 0.1, val: 1.5, color: '#F59E0B' },
+      { key: 'gravity', label: 'g', unit: 'm/s²', min: 1, max: 20, step: 0.1, val: 9.8, color: '#10B981' },
+      { key: 'amplitude', label: 'θ₀', unit: '°', min: 5, max: 170, step: 1, val: 45, color: '#6366F1' }
     ],
-    theory: `<div class="theory-title">📖 Lý thuyết</div>
-      <p>Con lắc đơn tuân theo phương trình vi phân <b>phi tuyến</b>:</p>
-      <div class="formula">θ̈ = −(g / L) · sin(θ)</div>
-      <p class="formula-label">Chu kỳ (xấp xỉ góc nhỏ):</p>
-      <div class="formula">T = 2π · √(L / g)</div>
-      <p>Mô phỏng sử dụng phương pháp <b>Runge-Kutta bậc 4</b> (RK4) nên chính xác cả ở biên độ lớn.</p>
-      <p class="formula-label">Bảo toàn năng lượng:</p>
-      <div class="formula">E = Eₖ + Eₜ = const</div>`
+    theory: `<p>Con lắc dao động với biên độ lớn tuân theo phương trình vi phân <b>phi tuyến</b>:</p>
+      <div class="formula">$$\\ddot{\\theta} + \\frac{g}{L} \\sin(\\theta) = 0$$</div>
+      <p class="formula-label">Chu kỳ dao động góc nhỏ (Tuyến tính):</p>
+      <div class="formula">$$T_0 = 2\\pi \\sqrt{\\frac{L}{g}}$$</div>
+      <p>Mô phỏng sử dụng phương pháp tích phân số **Runge-Kutta bậc 4** (RK4) giúp duy trì độ chính xác cao ngay cả ở biên độ cực đại.</p>
+      <p class="formula-label">Bảo toàn năng lượng cơ học:</p>
+      <div class="formula">$$E = E_k + E_t = \\frac{1}{2} m L^2 \\dot{\\theta}^2 + m g L (1 - \\cos\\theta) = \\text{const}$$</div>`
   },
   collision: {
     title: 'Va chạm đàn hồi',
-    subtitle: 'Bảo toàn động lượng & động năng – animation chính xác',
+    subtitle: 'Bảo toàn động lượng & bảo toàn động năng',
     latex: 'v_1\'=\\dfrac{m_1-m_2}{m_1+m_2}v_1 \\quad v_2\'=\\dfrac{2m_1}{m_1+m_2}v_1',
     params: [
-      { key: 'm1', label: 'm₁', unit: 'kg', min: 0.5, max: 5, step: 0.1, val: 2, color: '#ef4444' },
-      { key: 'm2', label: 'm₂', unit: 'kg', min: 0.5, max: 5, step: 0.1, val: 1, color: '#6c8cff' },
-      { key: 'v1', label: 'v₁', unit: 'm/s', min: 1, max: 15, step: 0.5, val: 5, color: '#f59e0b' },
-      { key: 'v2', label: 'v₂', unit: 'm/s', min: -10, max: 0, step: 0.5, val: 0, color: '#34d399' }
+      { key: 'm1', label: 'm₁', unit: 'kg', min: 0.5, max: 5, step: 0.1, val: 2.5, color: '#EF4444' },
+      { key: 'm2', label: 'm₂', unit: 'kg', min: 0.5, max: 5, step: 0.1, val: 1.5, color: '#06B6D4' },
+      { key: 'v1', label: 'v₁', unit: 'm/s', min: 1, max: 15, step: 0.5, val: 6.0, color: '#F59E0B' },
+      { key: 'v2', label: 'v₂', unit: 'm/s', min: -10, max: 0, step: 0.5, val: 0.0, color: '#10B981' }
     ],
-    theory: `<div class="theory-title">📖 Lý thuyết</div>
-      <p>Va chạm đàn hồi hoàn toàn bảo toàn cả <b>động lượng</b> và <b>động năng</b>.</p>
-      <p class="formula-label">Bảo toàn động lượng:</p>
-      <div class="formula">m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'</div>
-      <p class="formula-label">Bảo toàn động năng:</p>
-      <div class="formula">½m₁v₁² + ½m₂v₂² = ½m₁v₁'² + ½m₂v₂'²</div>
-      <p>Khi <b>m₁ = m₂</b>: trao đổi vận tốc hoàn toàn.<br>Khi <b>m₁ ≫ m₂</b>: m₁ gần như không đổi, m₂ bật ra với 2v₁.</p>`
+    theory: `<p>Va chạm đàn hồi hoàn toàn là quá trình tương tác bảo toàn cả <b>động lượng</b> và <b>động năng</b> của hệ hai vật.</p>
+      <p class="formula-label">Định luật bảo toàn động lượng:</p>
+      <div class="formula">$$m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2'$$</div>
+      <p class="formula-label">Định luật bảo toàn động năng:</p>
+      <div class="formula">$$\\frac{1}{2}m_1 v_1^2 + \\frac{1}{2}m_2 v_2^2 = \\frac{1}{2}m_1 v_1'^2 + \\frac{1}{2}m_2 v_2'^2$$</div>
+      <p>Khi hai vật cùng khối lượng ($m_1 = m_2$): chúng sẽ trao đổi hoàn toàn vận tốc cho nhau sau khi va chạm.</p>`
   },
   gas: {
     title: 'Khí lý tưởng',
-    subtitle: 'Maxwell-Boltzmann – va chạm đàn hồi giữa các phân tử',
+    subtitle: 'Phân bố Maxwell-Boltzmann và va chạm phân tử',
     latex: 'PV = nRT \\quad v_{rms} = \\sqrt{\\dfrac{3RT}{M}}',
     params: [
-      { key: 'gT', label: 'T', unit: 'K', min: 100, max: 800, step: 5, val: 300, color: '#ef4444' },
-      { key: 'gV', label: 'V', unit: 'L', min: 5, max: 50, step: 1, val: 22, color: '#6c8cff' },
-      { key: 'gn', label: 'n', unit: 'mol', min: 0.5, max: 3, step: 0.1, val: 1, color: '#34d399' }
+      { key: 'gT', label: 'T', unit: 'K', min: 100, max: 800, step: 5, val: 300, color: '#EF4444' },
+      { key: 'gV', label: 'V', unit: 'L', min: 8, max: 40, step: 1, val: 22, color: '#6366F1' },
+      { key: 'gn', label: 'n', unit: 'mol', min: 0.5, max: 3, step: 0.1, val: 1.0, color: '#10B981' }
     ],
-    theory: `<div class="theory-title">📖 Lý thuyết</div>
-      <p class="formula-label">Phương trình trạng thái khí lý tưởng:</p>
-      <div class="formula">PV = nRT</div>
-      <p>Với R = 8.314 J/(mol·K) = 0.0821 atm·L/(mol·K).</p>
-      <p class="formula-label">Tốc độ căn quân phương:</p>
-      <div class="formula">v_rms = √(3RT / M)</div>
-      <p>Tốc độ trung bình tỉ lệ <b>√T</b>. Hạt được khởi tạo theo phân bố <b>Maxwell-Boltzmann</b> (Box-Muller 2D), va chạm tường tạo áp suất.</p>`
+    theory: `<p class="formula-label">Phương trình trạng thái khí lý tưởng:</p>
+      <div class="formula">$$PV = nRT$$</div>
+      <p>Trong đó hằng số khí lý tưởng $R = 0.0821\\text{ atm}\\cdot\\text{L}/(\\text{mol}\\cdot\\text{K}) = 8.314\\text{ J}/(\\text{mol}\\cdot\\text{K})$.</p>
+      <p class="formula-label">Tốc độ căn quân phương ($v_{\\text{rms}}$):</p>
+      <div class="formula">$$v_{\\text{rms}} = \\sqrt{\\frac{3RT}{M}}$$</div>
+      <p>Các hạt khí được khởi tạo vận tốc theo phân bố xác suất **Maxwell-Boltzmann**. Va chạm đàn hồi với thành bình tạo nên áp suất khí.</p>`
   },
   carnot: {
     title: 'Chu trình Carnot',
-    subtitle: 'Đồ thị P-V thực – đẳng nhiệt & đoạn nhiệt (γ=5/3)',
+    subtitle: 'Đồ thị trạng thái P-V – Isotherms & Adiabats',
     latex: '\\eta_{Carnot} = 1 - \\dfrac{T_C}{T_H}',
     params: [
-      { key: 'T1', label: 'T<sub>H</sub>', unit: 'K', min: 300, max: 1200, step: 10, val: 600, color: '#ef4444' },
-      { key: 'T2', label: 'T<sub>C</sub>', unit: 'K', min: 100, max: 590, step: 10, val: 200, color: '#6c8cff' }
+      { key: 'T1', label: 'T_H', unit: 'K', min: 300, max: 1200, step: 10, val: 650, color: '#EF4444' },
+      { key: 'T2', label: 'T_C', unit: 'K', min: 100, max: 590, step: 10, val: 250, color: '#6366F1' }
     ],
-    theory: `<div class="theory-title">📖 Lý thuyết</div>
-      <p>Chu trình Carnot gồm <b>4 quá trình</b> thuận nghịch:</p>
+    theory: `<p>Chu trình Carnot là chu trình nhiệt động lực học lý tưởng bao gồm <b>4 quá trình</b>:</p>
       <div class="theory-steps">
-        <div class="theory-step"><span class="step-num">1→2</span> Giãn nở <b>đẳng nhiệt</b> ở T<sub>H</sub> (hấp thụ Q<sub>H</sub>)</div>
-        <div class="theory-step"><span class="step-num">2→3</span> Giãn nở <b>đoạn nhiệt</b> (PV<sup>γ</sup> = const)</div>
-        <div class="theory-step"><span class="step-num">3→4</span> Nén <b>đẳng nhiệt</b> ở T<sub>C</sub> (thải Q<sub>C</sub>)</div>
-        <div class="theory-step"><span class="step-num">4→1</span> Nén <b>đoạn nhiệt</b></div>
+        <div class="theory-step"><span class="step-num">1→2</span> Giãn nở <b>đẳng nhiệt</b> ở $T_H$ (nhận nhiệt lượng $Q_H$)</div>
+        <div class="theory-step"><span class="step-num">2→3</span> Giãn nở <b>đoạn nhiệt</b> ($PV^\\gamma = \\text{const}$)</div>
+        <div class="theory-step"><span class="step-num">3→4</span> Nén <b>đẳng nhiệt</b> ở $T_C$ (thải nhiệt lượng $Q_C$)</div>
+        <div class="theory-step"><span class="step-num">4→1</span> Nén <b>đạn nhiệt</b></div>
       </div>
-      <p class="formula-label">Hiệu suất Carnot:</p>
-      <div class="formula">η = 1 − T<sub>C</sub> / T<sub>H</sub></div>
-      <p>Đây là <b>giới hạn trên</b> cho hiệu suất mọi động cơ nhiệt.</p>`
+      <p class="formula-label">Hiệu suất cực đại của động cơ nhiệt:</p>
+      <div class="formula">$$\\eta = 1 - \\frac{T_C}{T_H}$$</div>
+      <p>Đồ thị biểu diễn chính xác đường cong đẳng nhiệt (màu đỏ/xanh) và đoạn nhiệt (màu xám).</p>`
   }
 };
 
-// ── State ──
+// ── State Variables ──
 let currentExp = 'projectile';
 let running = true;
 let animId = null;
@@ -110,25 +106,40 @@ let simSpeed = 1;
 
 let proj = {}, pend = {}, coll = {}, gasState = {}, carnotT = 0;
 let vfxParticles = [];
+let ambientParticles = [];
+let trails = [];
+let mouseX = -1000, mouseY = -1000;
+let zoomLevel = 1.0;
 
-// ── Colors (Premium Neon Dark Theme) ──
+// ── Colors (Deep Space Neon Palette) ──
 const C = {
-  bg: '#05070A', bg2: '#0B0E14', grid: 'rgba(255,255,255,.05)',
-  ground: 'rgba(0, 255, 102, 0.05)', groundLine: '#00FF66',
-  text: '#FFFFFF', muted: '#A0AABF', border: 'rgba(0, 240, 255, 0.3)',
-  blue: '#00F0FF', blue2: '#7C5CFC', blueGlow: 'rgba(0, 240, 255, 0.5)',
-  red: '#FF007F', orange: '#FFEA00', green: '#00FF66',
-  pink: '#FF007F', cyan: '#00F0FF', yellow: '#FFEA00',
-  lavender: '#7C5CFC', peach: '#FF3366', mint: '#00FF66', sky: '#00F0FF',
-  trail: 'rgba(0, 240, 255, 0.8)', trailFade: 'rgba(0, 240, 255, 0.1)'
+  bg: 'transparent',
+  bg2: 'rgba(10, 13, 23, 0.65)',
+  grid: 'rgba(255, 255, 255, 0.015)',
+  ground: 'rgba(0, 240, 255, 0.02)',
+  groundLine: 'rgba(0, 240, 255, 0.3)',
+  text: '#FFFFFF',
+  muted: '#8E9BB0',
+  border: 'rgba(255, 255, 255, 0.05)',
+  indigo: '#7C5CFC',
+  indigoGlow: 'rgba(124, 92, 252, 0.3)',
+  cyan: '#00F0FF',
+  amber: '#FFEA00',
+  mint: '#00FF66',
+  rose: '#FF007F',
+  purple: '#7C5CFC',
+  pink: '#FF007F',
+  sky: '#00F0FF',
+  trail: 'rgba(0, 240, 255, 0.8)',
+  trailFade: 'rgba(0, 240, 255, 0.05)'
 };
 
-// ── DOM ──
+// ── DOM References ──
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const eqBox = document.getElementById('equationBox');
 const pList = document.getElementById('paramsList');
-const sBox = document.getElementById('statsBox') || document.querySelector('.stats-box');
+const sBox = document.getElementById('statsBox');
 const tBox = document.getElementById('theoryBox');
 const btnPause = document.getElementById('btnPause');
 const btnReset = document.getElementById('btnReset');
@@ -136,34 +147,89 @@ const speedSl = document.getElementById('speedSlider');
 const speedVal = document.getElementById('speedValue');
 
 function resizeCanvas() {
-  const vp = canvas.parentElement;
-  const w = vp.clientWidth;
-  const h = vp.clientHeight;
-  if (w > 0 && h > 0) {
-    canvas.width = Math.floor(w);
-    canvas.height = Math.floor(h);
+  const container = canvas.parentElement;
+  if (container) {
+    const isZen = document.querySelector('.workspace').classList.contains('zen-mode');
+    if (isZen) {
+      container.style.zoom = "1.35"; // Phóng to 135% mọi thứ (bao gồm chữ, nét vẽ)
+      zoomLevel = 1.35;
+    } else {
+      container.style.zoom = "1";
+      zoomLevel = 1.0;
+    }
+    canvas.width = container.clientWidth;
+    canvas.height = container.clientHeight;
   }
 }
 
-// ── Speed Control ──
+// ── MAIN RENDER LOOP ──
+function render(time) {
+  if (!lastTs) lastTs = time;
+  const dt = Math.min((time - lastTs) / 1000, 0.1);
+  lastTs = time;
+
+  if (currentExp === 'projectile') drawProjectile(dt);
+  else if (currentExp === 'pendulum') drawPendulum(dt);
+  else if (currentExp === 'collision') drawCollision(dt);
+  else if (currentExp === 'gas') drawGas(dt);
+  else if (currentExp === 'carnot') drawCarnot(dt);
+
+  updateAndDrawParticles();
+  
+  updateStats();
+  updateVerification();
+
+  animId = requestAnimationFrame(render);
+}
+
+// ── Speed Controls ──
 speedSl.addEventListener('input', () => {
   simSpeed = +speedSl.value;
   speedVal.textContent = simSpeed.toFixed(1) + '×';
 });
+
+// ── LaTeX Clipboard copy logic ──
+const btnCopyMath = document.getElementById('btnCopyMath');
+const copyToast = document.getElementById('copyToast');
+if (btnCopyMath && copyToast) {
+  btnCopyMath.addEventListener('click', () => {
+    const exp = EXPERIMENTS[currentExp];
+    if (exp && exp.latex) {
+      navigator.clipboard.writeText(exp.latex).then(() => {
+        copyToast.classList.add('show');
+        setTimeout(() => copyToast.classList.remove('show'), 2000);
+      }).catch(err => console.error('Lỗi sao chép LaTeX:', err));
+    }
+  });
+}
 
 // ── UI Render ──
 const expIcons = { projectile: '🎯', pendulum: '🕐', collision: '💥', gas: '🫧', carnot: '♨️' };
 function renderUI() {
   const exp = EXPERIMENTS[currentExp];
   const icon = expIcons[currentExp] || '🔬';
-  document.getElementById('expTitle').innerHTML = `<span class="title-icon">${icon}</span> ${exp.title}`;
+  document.getElementById('expTitle').innerHTML = `<span class="title-icon">${icon}</span> <span class="gradient-text">${exp.title}</span>`;
   document.getElementById('expSubtitle').textContent = exp.subtitle;
+  
   const monTitle = document.getElementById('monitorTitle');
-  if (monTitle) monTitle.textContent = `🔬 ${exp.title}`;
+  if (monTitle) monTitle.textContent = `SIMULATION // ${exp.title.toUpperCase()}`;
+  
   katex.render(exp.latex, eqBox, { throwOnError: false, displayMode: true });
+  
+  // Set theory text HTML
   tBox.innerHTML = exp.theory || '';
-  // Append the verification comparison panel
   tBox.innerHTML += buildVerificationPanel();
+  
+  // Auto-render math in theory box using KaTeX
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(tBox, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });
+  }
 
   pList.innerHTML = '';
   exp.params.forEach(pr => {
@@ -172,14 +238,21 @@ function renderUI() {
     row.className = 'param-row';
     row.innerHTML = `
       <div class="param-header">
-        <span class="param-label" style="color:${pr.color}">${pr.label}</span>
-        <span class="param-value" style="color:${pr.color}" id="val-${pr.key}">${(+p[pr.key]).toFixed(1)}</span>
-        <span class="param-unit">${pr.unit}</span>
+        <span class="param-label" style="color:var(--text-main)">${pr.label}</span>
+        <div>
+          <span class="param-value" style="color:${pr.color}" id="val-${pr.key}">${(+p[pr.key]).toFixed(1)}</span>
+          <span class="param-unit">${pr.unit}</span>
+        </div>
       </div>
-      <input type="range" id="sl-${pr.key}" min="${pr.min}" max="${pr.max}" step="${pr.step}" value="${p[pr.key]}">
+      <input type="range" id="sl-${pr.key}" min="${pr.min}" max="${pr.max}" step="${pr.step}" value="${p[pr.key]}" class="sleek-slider">
     `;
     pList.appendChild(row);
-    row.querySelector(`#sl-${pr.key}`).addEventListener('input', e => {
+
+    // Apply accent colors dynamically to slider thumbs
+    const sliderInput = row.querySelector(`#sl-${pr.key}`);
+    sliderInput.style.accentColor = pr.color;
+
+    sliderInput.addEventListener('input', e => {
       const oldT = p.gT;
       p[pr.key] = +e.target.value;
       row.querySelector(`#val-${pr.key}`).textContent = (+p[pr.key]).toFixed(1);
@@ -197,18 +270,29 @@ function renderUI() {
 
 function updateStats() {
   if (!sBox) return;
+  // Cập nhật ảnh nền Vũ trụ riêng cho từng thí nghiệm
+  const bgImageMap = {
+    'projectile': "url('./projectile_bg.png')",
+    'pendulum': "url('./pendulum_bg.png')",
+    'collision': "url('./collision_bg.png')",
+    'gas': "url('./gas_bg.jpg')",
+    'carnot': "url('./carnot_bg.png')"
+  };
+  const canvasContainer = document.querySelector('.canvas-container');
+  if (canvasContainer && bgImageMap[currentExp]) {
+    canvasContainer.style.setProperty('--bg-image', bgImageMap[currentExp]);
+  }
   const stats = getStats();
   sBox.innerHTML = '';
-  stats.forEach((s, i) => {
+  stats.forEach(s => {
     const row = document.createElement('div');
     row.className = 'stat-row';
-    row.style.animationDelay = (i * 0.03) + 's';
     row.innerHTML = `<span class="stat-label">${s.label}</span><span class="stat-value">${s.value}</span>`;
     sBox.appendChild(row);
   });
 }
 
-// ── Stats ──
+// ── Stats Generator ──
 function getStats() {
   if (currentExp === 'projectile') {
     const a = p.angle * Math.PI / 180, v = p.v0, g = p.gravity;
@@ -216,12 +300,12 @@ function getStats() {
     const H = v * v * Math.sin(a) ** 2 / (2 * g);
     const T = 2 * v * Math.sin(a) / g;
     return [
-      { label: 'Tầm xa R', value: R.toFixed(2) + ' m' },
-      { label: 'Độ cao cực đại H', value: H.toFixed(2) + ' m' },
-      { label: 'Thời gian bay T', value: T.toFixed(3) + ' s' },
-      { label: 'v₀ₓ = v₀cos(α)', value: (v * Math.cos(a)).toFixed(2) + ' m/s' },
-      { label: 'v₀ᵧ = v₀sin(α)', value: (v * Math.sin(a)).toFixed(2) + ' m/s' },
-      { label: 't hiện tại', value: (proj.t || 0).toFixed(2) + ' s' }
+      { label: 'Tầm xa (R)', value: R.toFixed(2) + ' m' },
+      { label: 'Độ cao cực đại (H)', value: H.toFixed(2) + ' m' },
+      { label: 'Thời gian bay (T)', value: T.toFixed(3) + ' s' },
+      { label: 'Vận tốc đầu x (v₀ₓ)', value: (v * Math.cos(a)).toFixed(1) + ' m/s' },
+      { label: 'Vận tốc đầu y (v₀ᵧ)', value: (v * Math.sin(a)).toFixed(1) + ' m/s' },
+      { label: 'Thời gian thực tế', value: (proj.t || 0).toFixed(2) + ' s' }
     ];
   }
   if (currentExp === 'pendulum') {
@@ -232,12 +316,12 @@ function getStats() {
     const E_kin = 0.5 * L * L * (pend.omega || 0) ** 2;
     const E_pot = g * L * (1 - Math.cos(pend.theta || th0));
     return [
-      { label: 'T (góc nhỏ)', value: T0.toFixed(4) + ' s' },
-      { label: 'T (bậc 4)', value: T2.toFixed(4) + ' s' },
-      { label: 'θ hiện tại', value: ((pend.theta || 0) * 180 / Math.PI).toFixed(1) + '°' },
-      { label: 'ω hiện tại', value: (pend.omega || 0).toFixed(3) + ' rad/s' },
-      { label: 'E<sub>K</sub> / E<sub>tổng</sub>', value: (E_kin / Math.max(E_total, 1e-9) * 100).toFixed(1) + '%' },
-      { label: 'E<sub>U</sub> / E<sub>tổng</sub>', value: (E_pot / Math.max(E_total, 1e-9) * 100).toFixed(1) + '%' }
+      { label: 'Chu kỳ tuyến tính (T₀)', value: T0.toFixed(4) + ' s' },
+      { label: 'Chu kỳ chính xác (T)', value: T2.toFixed(4) + ' s' },
+      { label: 'Ly độ góc (θ)', value: ((pend.theta || 0) * 180 / Math.PI).toFixed(1) + '°' },
+      { label: 'Vận tốc góc (ω)', value: (pend.omega || 0).toFixed(3) + ' rad/s' },
+      { label: 'Động năng (E_kin %)', value: (E_kin / Math.max(E_total, 1e-9) * 100).toFixed(1) + '%' },
+      { label: 'Thế năng (E_pot %)', value: (E_pot / Math.max(E_total, 1e-9) * 100).toFixed(1) + '%' }
     ];
   }
   if (currentExp === 'collision') {
@@ -248,12 +332,12 @@ function getStats() {
     const KEi = 0.5 * m1 * v1i ** 2 + 0.5 * m2 * v2i ** 2;
     const KEf = 0.5 * m1 * v1f ** 2 + 0.5 * m2 * v2f ** 2;
     return [
-      { label: "v₁' (sau)", value: v1f.toFixed(3) + ' m/s' },
-      { label: "v₂' (sau)", value: v2f.toFixed(3) + ' m/s' },
-      { label: 'p trước', value: pi.toFixed(3) + ' kg·m/s' },
-      { label: 'p sau', value: pf.toFixed(3) + ' kg·m/s' },
-      { label: 'KE trước', value: KEi.toFixed(3) + ' J' },
-      { label: 'KE sau', value: KEf.toFixed(3) + ' J' }
+      { label: "v₁' sau va chạm", value: v1f.toFixed(2) + ' m/s' },
+      { label: "v₂' sau va chạm", value: v2f.toFixed(2) + ' m/s' },
+      { label: 'Động lượng đầu (p_i)', value: pi.toFixed(2) + ' kg·m/s' },
+      { label: 'Động lượng sau (p_f)', value: pf.toFixed(2) + ' kg·m/s' },
+      { label: 'Động năng đầu (K_i)', value: KEi.toFixed(2) + ' J' },
+      { label: 'Động năng sau (K_f)', value: KEf.toFixed(2) + ' J' }
     ];
   }
   if (currentExp === 'gas') {
@@ -262,40 +346,37 @@ function getStats() {
     const M = 0.029;
     const vrms = Math.sqrt(3 * 8.314 * T / M);
     return [
-      { label: 'Áp suất P', value: P.toFixed(4) + ' atm' },
-      { label: 'nRT', value: (n * R_gas * T).toFixed(2) + ' atm·L' },
-      { label: 'v<sub>rms</sub>', value: vrms.toFixed(0) + ' m/s' },
-      { label: 'E<sub>K</sub> trung bình', value: (1.5 * 1.381e-23 * T * 1e23).toFixed(2) + ' ×10⁻²³ J' }
+      { label: 'Áp suất khí (P)', value: P.toFixed(4) + ' atm' },
+      { label: 'Vận tốc v_rms', value: vrms.toFixed(0) + ' m/s' },
+      { label: 'Độ lớn V', value: V.toFixed(1) + ' L' },
+      { label: 'Động năng hạt TB', value: (1.5 * 1.381e-23 * T * 1e23).toFixed(2) + ' ×10⁻²³ J' }
     ];
   }
   if (currentExp === 'carnot') {
     const T1 = p.T1, T2 = p.T2;
-    if (T2 >= T1) return [{ label: '⚠ Cần T<sub>C</sub> < T<sub>H</sub>', value: '' }];
+    if (T2 >= T1) return [{ label: 'Lỗi', value: 'TC >= TH' }];
     const eta = (1 - T2 / T1) * 100;
-    const W_net = 'nR·(T<sub>H</sub>−T<sub>C</sub>)·ln(V₂/V₁)';
+    const W_net = 'nR(T_H - T_C)ln(V₂/V₁)';
     return [
-      { label: 'Hiệu suất η', value: eta.toFixed(2) + '%' },
-      { label: 'T<sub>H</sub> − T<sub>C</sub>', value: (T1 - T2) + ' K' },
-      { label: 'W<sub>net</sub>', value: W_net },
-      { label: 'COP (làm lạnh)', value: (T2 / (T1 - T2)).toFixed(2) }
+      { label: 'Hiệu suất (η)', value: eta.toFixed(2) + '%' },
+      { label: 'Hiệu nhiệt độ (ΔT)', value: (T1 - T2) + ' K' },
+      { label: 'Hệ số làm lạnh (COP)', value: (T2 / (T1 - T2)).toFixed(2) },
+      { label: 'Công chu trình (W)', value: 'Hệ kín tuần hoàn' }
     ];
   }
   return [];
 }
 
-// ═══════════════════════════════════════════════════
-// VERIFICATION – Theory vs Simulation Comparison
-// ═══════════════════════════════════════════════════
-
+// ── Theory vs Simulation Verification ──
 function buildVerificationPanel() {
   return `
     <div class="verify-panel" id="verifyPanel">
       <div class="verify-header">
         <span class="verify-icon">🔍</span>
-        <span class="verify-title">Kiểm chứng lý thuyết</span>
+        <span>Kiểm chứng đối chiếu dữ liệu</span>
       </div>
       <div class="verify-body" id="verifyBody">
-        <div class="verify-loading">Đang thu thập dữ liệu mô phỏng…</div>
+        <div class="verify-loading">Đang chờ khởi động dữ liệu mô phỏng…</div>
       </div>
     </div>`;
 }
@@ -305,7 +386,6 @@ function updateVerification() {
   if (!body) return;
 
   let rows = [];
-
   try {
     if (currentExp === 'projectile' && proj && proj.Tf) {
       const a = p.angle * Math.PI / 180, v = p.v0, g = p.gravity;
@@ -321,15 +401,14 @@ function updateVerification() {
       const simH = Math.max(y_sim, 0);
       const errR = R_th > 0 ? Math.abs(simR - R_th) / R_th * 100 : 0;
 
-      rows.push(makeVerifyRow('Tầm xa R', R_th.toFixed(2) + ' m', landed ? R_th.toFixed(2) + ' m' : x_sim.toFixed(2) + ' m', landed ? 0 : errR, 'R = v₀²·sin(2α) / g'));
-      rows.push(makeVerifyRow('Độ cao max H', H_th.toFixed(2) + ' m', simH.toFixed(2) + ' m', H_th > 0 ? Math.abs(simH - H_th) / H_th * 100 : 0, 'H = v₀²·sin²α / (2g)'));
-      rows.push(makeVerifyRow('Thời gian bay T', T_th.toFixed(3) + ' s', t.toFixed(3) + ' s', T_th > 0 ? Math.abs(t - T_th) / T_th * 100 : 0, 'T = 2v₀·sinα / g'));
-      rows.push(makeProgressBar('Tiến trình bay', progress));
+      rows.push(makeVerifyRow('Tầm bay xa (R)', R_th.toFixed(2) + ' m', landed ? R_th.toFixed(2) + ' m' : x_sim.toFixed(2) + ' m', landed ? 0 : errR, 'R = \\frac{v_0^2 \\sin(2\\alpha)}{g}'));
+      rows.push(makeVerifyRow('Độ cao cực đại (H)', H_th.toFixed(2) + ' m', simH.toFixed(2) + ' m', H_th > 0 ? Math.abs(simH - H_th) / H_th * 100 : 0, 'H = \\frac{v_0^2 \\sin^2(\\alpha)}{2g}'));
+      rows.push(makeVerifyRow('Thời gian bay (T)', T_th.toFixed(3) + ' s', t.toFixed(3) + ' s', T_th > 0 ? Math.abs(t - T_th) / T_th * 100 : 0, 'T = \\frac{2v_0 \\sin(\\alpha)}{g}'));
+      rows.push(makeProgressBar('Tiến trình quỹ đạo bay', progress));
     }
-
     else if (currentExp === 'pendulum' && pend && pend.theta !== undefined) {
-      const L = p.length || 1.5, g = p.gravity || 9.8;
-      const th0 = (p.amplitude || 45) * Math.PI / 180;
+      const L = p.length, g = p.gravity;
+      const th0 = p.amplitude * Math.PI / 180;
       const T_simple = 2 * Math.PI * Math.sqrt(L / g);
       const T_corr = T_simple * (1 + th0 * th0 / 16 + 11 * Math.pow(th0, 4) / 3072);
       const E_total = g * L * (1 - Math.cos(th0));
@@ -340,12 +419,11 @@ function updateVerification() {
       const E_sum = E_kin + E_pot;
       const E_err = E_total > 1e-9 ? Math.abs(E_sum - E_total) / E_total * 100 : 0;
 
-      rows.push(makeVerifyRow('Chu kỳ T₀ (góc nhỏ)', T_simple.toFixed(4) + ' s', '—', null, 'T₀ = 2π√(L/g)'));
-      rows.push(makeVerifyRow('Chu kỳ T (hiệu chỉnh)', T_corr.toFixed(4) + ' s', '—', null, 'Bậc 4 xấp xỉ'));
-      rows.push(makeVerifyRow('Bảo toàn năng lượng', E_total.toFixed(4) + ' J', E_sum.toFixed(4) + ' J', E_err, 'E = Eₖ + Eₜ = const'));
-      rows.push(makeProgressBar('Bảo toàn E (%)', Math.max(0, 1 - E_err / 5)));
+      rows.push(makeVerifyRow('Chu kỳ góc nhỏ T₀', T_simple.toFixed(4) + ' s', '—', null, 'T_0 = 2\\pi \\sqrt{\\frac{L}{g}}'));
+      rows.push(makeVerifyRow('Chu kỳ hiệu chỉnh T', T_corr.toFixed(4) + ' s', '—', null, '\\text{Dao động phi tuyến bậc 4}'));
+      rows.push(makeVerifyRow('Bảo toàn cơ năng E', E_total.toFixed(4) + ' J', E_sum.toFixed(4) + ' J', E_err, 'E = E_k + E_t = \\text{const}'));
+      rows.push(makeProgressBar('Mức độ bảo toàn năng lượng', Math.max(0, 1 - E_err / 2)));
     }
-
     else if (currentExp === 'collision' && p.m1) {
       const m1 = p.m1, m2 = p.m2, v1i = p.v1, v2i = p.v2 || 0;
       const v1f = ((m1 - m2) * v1i + 2 * m2 * v2i) / (m1 + m2);
@@ -357,68 +435,69 @@ function updateVerification() {
       const pErr = Math.abs(pi) > 1e-9 ? Math.abs(pf - pi) / Math.abs(pi) * 100 : 0;
       const keErr = KEi > 1e-9 ? Math.abs(KEf - KEi) / KEi * 100 : 0;
 
-      rows.push(makeVerifyRow('Động lượng p (trước)', pi.toFixed(3) + ' kg·m/s', pf.toFixed(3) + ' kg·m/s', pErr, 'Σmv = const'));
-      rows.push(makeVerifyRow('Động năng KE', KEi.toFixed(3) + ' J', KEf.toFixed(3) + ' J', keErr, '½Σmv² = const'));
-      rows.push(makeVerifyRow("v₁' (sau va chạm)", v1f.toFixed(3) + ' m/s', '—', null, '(m₁−m₂)v₁/(m₁+m₂)'));
-      rows.push(makeVerifyRow("v₂' (sau va chạm)", v2f.toFixed(3) + ' m/s', '—', null, '2m₁v₁/(m₁+m₂)'));
+      rows.push(makeVerifyRow('Động lượng hệ p', pi.toFixed(2) + ' kg·m/s', pf.toFixed(2) + ' kg·m/s', pErr, '\\sum p_i = \\sum p_f'));
+      rows.push(makeVerifyRow('Động năng hệ K', KEi.toFixed(2) + ' J', KEf.toFixed(2) + ' J', keErr, '\\sum E_{ki} = \\sum E_{kf}'));
+      rows.push(makeVerifyRow("Vận tốc v₁' lý thuyết", v1f.toFixed(2) + ' m/s', '—', null, 'v_1\' = \\frac{m_1-m_2}{m_1+m_2}v_1 + \\frac{2m_2}{m_1+m_2}v_2'));
+      rows.push(makeVerifyRow("Vận tốc v₂' lý thuyết", v2f.toFixed(2) + ' m/s', '—', null, 'v_2\' = \\frac{2m_1}{m_1+m_2}v_1 + \\frac{m_2-m_1}{m_1+m_2}v_2'));
     }
-
     else if (currentExp === 'gas' && p.gT) {
-      const R_gas = 0.0821, T = p.gT, V = p.gV || 22, n = p.gn || 1;
+      const R_gas = 0.0821, T = p.gT, V = p.gV, n = p.gn;
       const P_th = n * R_gas * T / V;
       const M = 0.029;
       const vrms_th = Math.sqrt(3 * 8.314 * T / M);
       let vrms_sim = 0;
       if (gasState && gasState.particles && gasState.particles.length > 0) {
         let sumV2 = 0;
-        for (let i = 0; i < gasState.particles.length; i++) {
-          const pt = gasState.particles[i];
-          sumV2 += pt.vx * pt.vx + pt.vy * pt.vy;
-        }
+        gasState.particles.forEach(pt => { sumV2 += pt.vx * pt.vx + pt.vy * pt.vy; });
         vrms_sim = Math.sqrt(sumV2 / gasState.particles.length);
       }
-
       const expected_sim_vrms = Math.sqrt(2) * 2.0 * Math.sqrt(T / 300);
       const velScale = vrms_th / expected_sim_vrms;
       const vrms_sim_ms = vrms_sim * velScale;
       const vrmsErr = Math.abs(vrms_sim_ms - vrms_th) / vrms_th * 100;
 
-      rows.push(makeVerifyRow('Áp suất P', P_th.toFixed(4) + ' atm', '—', null, 'P = nRT / V'));
-      rows.push(makeVerifyRow('v<sub>rms</sub>', vrms_th.toFixed(0) + ' m/s', vrms_sim_ms.toFixed(0) + ' m/s', vrmsErr, 'v = √(3RT/M)'));
-      rows.push(makeVerifyRow('Eₖ trung bình', (1.5 * 1.381e-23 * T * 1e23).toFixed(2) + ' ×10⁻²³ J', '—', null, 'Eₖ = 3/2 · kT'));
+      rows.push(makeVerifyRow('Áp suất lý thuyết P', P_th.toFixed(4) + ' atm', '—', null, 'P = \\frac{nRT}{V}'));
+      rows.push(makeVerifyRow('Tốc độ v_rms căn bản', vrms_th.toFixed(0) + ' m/s', vrms_sim_ms.toFixed(0) + ' m/s', vrmsErr, 'v_{\\text{rms}} = \\sqrt{\\frac{3RT}{M}}'));
     }
-
-    else if (currentExp === 'carnot') {
-      if (p.T1 && p.T2) {
-        const T1 = Number(p.T1), T2 = Number(p.T2);
-        if (T2 < T1) {
-          const eta = (1 - T2 / T1) * 100;
-          const cop = T2 / (T1 - T2);
-          rows.push(makeVerifyRow('Hiệu suất Carnot η', eta.toFixed(2) + ' %', '—', null, 'η = 1 − T<sub>C</sub> / T<sub>H</sub>'));
-          rows.push(makeVerifyRow('COP (làm lạnh)', cop.toFixed(2), '—', null, 'COP = T<sub>C</sub> / (T<sub>H</sub> − T<sub>C</sub>)'));
-          rows.push(makeVerifyRow('Chênh lệch ΔT', (T1 - T2) + ' K', '—', null, 'ΔT = T<sub>H</sub> − T<sub>C</sub>'));
-        }
+    else if (currentExp === 'carnot' && p.T1 && p.T2) {
+      const T1 = Number(p.T1), T2 = Number(p.T2);
+      if (T2 < T1) {
+        const eta = (1 - T2 / T1) * 100;
+        const cop = T2 / (T1 - T2);
+        rows.push(makeVerifyRow('Hiệu suất Carnot η', eta.toFixed(1) + ' %', '—', null, '\\eta = 1 - \\frac{T_C}{T_H}'));
+        rows.push(makeVerifyRow('Hệ số lạnh COP', cop.toFixed(2), '—', null, '\\text{COP} = \\frac{T_C}{T_H - T_C}'));
       }
     }
   } catch (e) {
-    console.error('[Verification Error]', e);
+    console.error('Lỗi tính đối chiếu lý thuyết:', e);
   }
 
   if (rows.length === 0) {
-    body.innerHTML = '<div class="verify-loading">Đang thu thập dữ liệu…</div>';
+    body.innerHTML = '<div class="verify-loading">Đang cập nhật luồng mô phỏng…</div>';
     return;
   }
   body.innerHTML = rows.join('');
+
+  // Auto-render math in verify panel using KaTeX
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ],
+      throwOnError: false
+    });
+  }
 }
 
 function makeVerifyRow(label, theoryVal, simVal, errorPct, formula) {
   const hasError = errorPct !== null && errorPct !== undefined && simVal !== '—';
   let badgeHTML = '';
   if (hasError) {
-    const errClass = errorPct < 1 ? 'verify-excellent' : errorPct < 5 ? 'verify-good' : 'verify-warn';
-    const errIcon = errorPct < 1 ? '✅' : errorPct < 5 ? '🟢' : '🔴';
-    const errText = errorPct < 1 ? 'Chính xác' : errorPct < 5 ? 'Khớp tốt' : 'Sai lệch';
-    badgeHTML = `<span class="verify-badge ${errClass}">${errIcon} ${errText} (${errorPct.toFixed(1)}%)</span>`;
+    const errClass = errorPct < 0.5 ? 'verify-excellent' : errorPct < 3 ? 'verify-good' : 'verify-warn';
+    const errIcon = errorPct < 0.5 ? '✓' : '•';
+    const errText = errorPct < 0.5 ? 'Chính xác' : 'Sai lệch';
+    badgeHTML = `<span class="verify-badge ${errClass}">${errIcon} ${errText} (${errorPct.toFixed(2)}%)</span>`;
   }
   return `
     <div class="verify-row">
@@ -428,36 +507,32 @@ function makeVerifyRow(label, theoryVal, simVal, errorPct, formula) {
       </div>
       <div class="verify-values">
         <div class="verify-col">
-          <span class="verify-col-label">📐 Lý thuyết</span>
+          <span class="verify-col-label">📐 LÝ THUYẾT</span>
           <span class="verify-col-value">${theoryVal}</span>
         </div>
         ${simVal !== '—' ? `
         <div class="verify-col">
-          <span class="verify-col-label">🎯 Mô phỏng</span>
+          <span class="verify-col-label">🎯 MÔ PHỎNG</span>
           <span class="verify-col-value">${simVal}</span>
         </div>` : ''}
       </div>
-      <div class="verify-formula">${formula}</div>
+      <div class="verify-formula">$${formula}$</div>
     </div>`;
 }
 
 function makeProgressBar(label, ratio) {
   const pct = Math.max(0, Math.min(100, ratio * 100));
-  const barColor = pct > 90 ? '#2ED573' : pct > 50 ? '#FECA57' : '#FF6B6B';
+  const barColor = pct > 90 ? 'var(--accent-mint)' : pct > 40 ? 'var(--accent-indigo)' : 'var(--accent-rose)';
   return `
     <div class="verify-progress">
       <div class="verify-progress-label">${label}: ${pct.toFixed(0)}%</div>
       <div class="verify-progress-track">
-        <div class="verify-progress-fill" style="width:${pct}%;background:${barColor}"></div>
+        <div class="verify-progress-fill" style="width:${pct}%; background-color:${barColor}"></div>
       </div>
     </div>`;
 }
 
-// ═══════════════════════════════════════════════════
-// PHYSICS ENGINE
-// ═══════════════════════════════════════════════════
-
-// ── RK4 Integrator ──
+// ── Runge-Kutta 4th Order Integrator ──
 function rk4Step(theta, omega, dt, g, L) {
   const f = th => -(g / L) * Math.sin(th);
   const k1o = f(theta), k1t = omega;
@@ -470,7 +545,7 @@ function rk4Step(theta, omega, dt, g, L) {
   };
 }
 
-// ── Maxwell-Boltzmann 2D (Box-Muller) ──
+// ── Box-Muller 2D Speed Generator ──
 function sampleMB(sigma) {
   const u1 = Math.max(1e-10, Math.random()), u2 = Math.random();
   return {
@@ -479,10 +554,11 @@ function sampleMB(sigma) {
   };
 }
 
-// ── Init Physics ──
+// ── Initialize Physics Engines ──
 function initPhysics() {
   resizeCanvas();
   const W = canvas.width, H = canvas.height;
+  if (W <= 0 || H <= 0) return;
 
   if (currentExp === 'projectile') {
     const a = p.angle * Math.PI / 180, v0 = p.v0, g = p.gravity;
@@ -498,45 +574,49 @@ function initPhysics() {
       R, Hmax
     };
   }
-  if (currentExp === 'pendulum') {
-    const th0 = (p.amplitude ?? 45) * Math.PI / 180;
+  else if (currentExp === 'pendulum') {
+    const th0 = p.amplitude * Math.PI / 180;
     pend = { theta: th0, omega: 0, trail: [], thetaHistory: [] };
   }
-  if (currentExp === 'collision') {
+  else if (currentExp === 'collision') {
     const m1 = p.m1, m2 = p.m2, v1i = p.v1, v2i = p.v2 || 0;
     const v1f = ((m1 - m2) * v1i + 2 * m2 * v2i) / (m1 + m2);
     const v2f = ((m2 - m1) * v2i + 2 * m1 * v1i) / (m1 + m2);
-    const r1 = 12 + m1 * 7, r2 = 12 + m2 * 7;
-    const maxV = Math.max(Math.abs(v1i), Math.abs(v2i), Math.abs(v1f), Math.abs(v2f), 1);
-    const VEL = 2.5; // px per (m/s) per frame at 60fps
+    const r1 = 16 + m1 * 6, r2 = 16 + m2 * 6;
+    const VEL = 2.0; 
     coll = {
-      x1: r1 + 30, x2: W / 2 + 80,
+      x1: r1 + 40, x2: W / 2 + 100,
       r1, r2, v1i, v2i, v1f, v2f,
-      by: H - 80, velScale: VEL,
-      phase: 'approach', postTimer: 0, flash: 0
+      by: H - 90, velScale: VEL,
+      phase: 'approach', postTimer: 0, flash: 0,
+      shockwaves: []
     };
   }
-  if (currentExp === 'gas') initGas();
-  if (currentExp === 'carnot') carnotT = 0;
+  else if (currentExp === 'gas') {
+    initGas();
+  }
+  else if (currentExp === 'carnot') {
+    carnotT = 0;
+  }
 }
 
 function gasBox() {
   const W = canvas.width, H = canvas.height, V = p.gV || 22;
-  const side = Math.max(100, Math.min(260, 200 * Math.sqrt(V / 22)));
+  const side = Math.max(120, Math.min(280, 210 * Math.sqrt(V / 22)));
   const cx = W / 2, cy = H / 2;
   return { cx, side, topY: cy - side / 2, botY: cy + side / 2, leftX: cx - side / 2, rightX: cx + side / 2 };
 }
 
 function initGas() {
-  const { cx, side, topY, botY, leftX, rightX } = gasBox();
+  const { side, topY, leftX } = gasBox();
   const T = p.gT || 300;
   const sigma = 2.0 * Math.sqrt(T / 300);
   gasState = { particles: [], wallHits: 0 };
-  for (let i = 0; i < 80; i++) {
+  for (let i = 0; i < 90; i++) {
     const { vx, vy } = sampleMB(sigma);
     gasState.particles.push({
-      x: leftX + 10 + Math.random() * (side - 20),
-      y: topY + 10 + Math.random() * (side - 20),
+      x: leftX + 8 + Math.random() * (side - 16),
+      y: topY + 8 + Math.random() * (side - 16),
       vx, vy
     });
   }
@@ -551,280 +631,313 @@ function rebuildGasContainer() {
   });
 }
 
-// ═══════════════════════════════════════════════════
-// DRAWING
-// ═══════════════════════════════════════════════════
-
+// ── Grid drawing with high-precision look ──
 function drawGrid() {
   const W = canvas.width, H = canvas.height;
-  // Neon sleek grid
-  ctx.fillStyle = 'rgba(255,255,255,.03)';
-  for (let x = 0; x < W; x += 40) for (let y = 0; y < H; y += 40) {
-    ctx.fillRect(x, y, 1, 1);
+  ctx.fillStyle = C.grid;
+  for (let x = 0; x < W; x += 30) {
+    ctx.fillRect(x, 0, 1, H);
+  }
+  for (let y = 0; y < H; y += 30) {
+    ctx.fillRect(0, y, W, 1);
   }
 }
 
-// ── PROJECTILE (Analytical trajectory) ──
+// ── PROJECTILE SIMULATION DRAWING ──
 function drawProjectile(dt) {
   const W = canvas.width, H = canvas.height;
-  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = C.bg; 
+  ctx.fillRect(0, 0, W, H);
   drawGrid();
 
   const { vx, vy, g, scale, ox, oy, Tf, R, Hmax } = proj;
 
-  // Đất với gradient tối (neon style)
+  // Ground rendering (SaaS elegant style)
   const grd = ctx.createLinearGradient(0, oy, 0, H);
-  grd.addColorStop(0, 'rgba(0, 255, 102, 0.1)'); grd.addColorStop(1, 'rgba(0, 255, 102, 0.0)');
-  ctx.fillStyle = grd; ctx.fillRect(0, oy, W, H - oy);
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2.5;
+  grd.addColorStop(0, 'rgba(99, 102, 241, 0.03)'); 
+  grd.addColorStop(1, 'rgba(99, 102, 241, 0)');
+  ctx.fillStyle = grd; 
+  ctx.fillRect(0, oy, W, H - oy);
+  ctx.strokeStyle = C.groundLine; 
+  ctx.lineWidth = 2;
   ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(W, oy); ctx.stroke();
 
-  // Trục tọa độ
-  ctx.strokeStyle = 'rgba(45,43,61,.2)'; ctx.lineWidth = 1.5;
-  ctx.setLineDash([4, 4]);
-  ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox, 30); ctx.stroke();
+  // Cartesian Axes
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)'; 
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox, 20); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(W - 20, oy); ctx.stroke();
   ctx.setLineDash([]);
-  ctx.fillStyle = C.muted; ctx.font = 'bold 14px Inter';
-  ctx.textAlign = 'center'; ctx.fillText('x', W - 15, oy + 18);
-  ctx.fillText('y', ox - 14, 30);
 
-  // Quỹ đạo lý thuyết (parabol đầy đủ)
-  ctx.beginPath(); ctx.setLineDash([5, 4]);
-  ctx.strokeStyle = 'rgba(84,160,255,.35)'; ctx.lineWidth = 2;
+  // Axis Labels
+  ctx.fillStyle = C.muted; 
+  ctx.font = 'bold 11px var(--font-mono)';
+  ctx.textAlign = 'center'; 
+  ctx.fillText('x (m)', W - 25, oy + 20);
+  ctx.fillText('y (m)', ox - 18, 24);
+
+  // Draw launching angle sector (glowing arc)
+  ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.arc(ox, oy, 40, 0, -p.angle * Math.PI / 180, true);
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(245, 158, 11, 0.08)';
+  ctx.beginPath();
+  ctx.moveTo(ox, oy);
+  ctx.arc(ox, oy, 40, 0, -p.angle * Math.PI / 180, true);
+  ctx.closePath();
+  ctx.fill();
+
+  // Theoretical trajectory path (clean vector curve)
+  ctx.beginPath(); 
+  ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)'; 
+  ctx.lineWidth = 1.5;
   for (let i = 0; i <= 100; i++) {
     const tt = (i / 100) * Tf;
     const px = ox + vx * tt * scale;
     const py = oy - (vy * tt - .5 * g * tt * tt) * scale;
     i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
   }
-  ctx.stroke(); ctx.setLineDash([]);
+  ctx.stroke(); 
+  ctx.setLineDash([]);
 
-  // Đánh dấu H_max và R
+  // Max Height and Range markers
   const hx = ox + vx * (Tf / 2) * scale, hy = oy - Hmax * scale;
-  ctx.setLineDash([3, 4]); ctx.strokeStyle = 'rgba(245,158,11,.4)'; ctx.lineWidth = 1.5;
+  ctx.setLineDash([2, 3]); 
+  ctx.strokeStyle = 'rgba(245, 158, 11, 0.25)'; 
+  ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(hx, oy); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(ox, hy); ctx.lineTo(hx, hy); ctx.stroke();
   ctx.setLineDash([]);
-  ctx.fillStyle = C.orange; ctx.font = 'bold 14px Inter'; ctx.textAlign = 'right';
-  ctx.fillText('H=' + Hmax.toFixed(1) + 'm', ox - 6, hy + 5);
-  const rx = ox + R * scale;
-  ctx.fillStyle = C.green; ctx.textAlign = 'center';
-  ctx.fillText('R=' + R.toFixed(1) + 'm', rx, oy + 20);
 
-  // Cập nhật t
+  ctx.fillStyle = C.amber; 
+  ctx.font = 'bold 12px var(--font-title)'; 
+  ctx.textAlign = 'right';
+  ctx.fillText('H = ' + Hmax.toFixed(2) + ' m', ox - 10, hy + 4);
+
+  const rx = ox + R * scale;
+  ctx.fillStyle = C.mint; 
+  ctx.textAlign = 'center';
+  ctx.fillText('R = ' + R.toFixed(2) + ' m', rx, oy + 22);
+
+  // Time & position calculation
   if (running) {
     proj.t += dt * simSpeed;
-    if (proj.t > Tf) { 
-      spawnParticles(ox + vx * Tf * scale, oy, C.orange, 30);
-      
-      const new_vy = vy * 0.7;
-      const new_vx = vx * 0.9;
-      const new_Tf = 2 * new_vy / g;
-      
-      if (new_Tf < 0.2) {
+    if (proj.t > Tf) {
+      spawnParticles(ox + vx * Tf * scale, oy, C.amber, 20);
+      const nextVy = vy * 0.65;
+      const nextVx = vx * 0.85;
+      const nextTf = 2 * nextVy / g;
+      if (nextTf < 0.15) {
         initPhysics();
       } else {
         proj.ox = ox + vx * Tf * scale;
-        proj.vx = new_vx;
-        proj.vy = new_vy;
-        proj.Tf = new_Tf;
+        proj.vx = nextVx;
+        proj.vy = nextVy;
+        proj.Tf = nextTf;
         proj.t = 0;
-        proj.R = new_vx * new_Tf;
-        proj.Hmax = (new_vy * new_vy) / (2 * g);
+        proj.R = nextVx * nextTf;
+        proj.Hmax = (nextVy * nextVy) / (2 * g);
       }
     }
   }
+
   const t = proj.t;
   const bx = ox + vx * t * scale;
   const by = oy - (vy * t - .5 * g * t * t) * scale;
-  proj.trail.push({ x: bx, y: by, t });
-  if (proj.trail.length > 300) proj.trail.shift();
-
-  // Trail glow
-  if (proj.trail.length > 1) {
-    ctx.beginPath();
-    proj.trail.forEach((pt, i) => {
-      ctx.globalAlpha = (i / proj.trail.length) * .5;
-      i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y);
-    });
-    ctx.strokeStyle = C.blue; ctx.lineWidth = 2.5; ctx.stroke();
-    ctx.globalAlpha = 1;
+  
+  if (running) {
+    addTrail(bx, by, C.cyan);
   }
+  drawTrails();
 
-  // Velocity vector
+  // Theoretical trajectory path (clean vector curve)
+  ctx.beginPath();
+  ctx.setLineDash([4, 4]);
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)'; 
+  ctx.lineWidth = 1.5;
+  for (let i = 0; i <= 100; i++) {
+    const tt = (i / 100) * Tf;
+    const px = ox + vx * tt * scale;
+    const py = oy - (vy * tt - .5 * g * tt * tt) * scale;
+    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  }
+  ctx.stroke(); 
+  ctx.setLineDash([]);
+
+  // Draw velocity vector components (pro HUD look)
   const curVx = vx, curVy = vy - g * t;
-  const vScale = 1.8;
-  ctx.strokeStyle = C.orange; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(bx, by);
-  ctx.lineTo(bx + curVx * vScale, by - curVy * vScale); ctx.stroke();
-  // arrowhead
-  const angle = Math.atan2(-curVy, curVx);
-  ctx.fillStyle = C.orange;
+  const vScale = 1.5;
+  
+  // Component Vx (Horizontal)
+  ctx.strokeStyle = C.sky; ctx.lineWidth = 1; ctx.setLineDash([2, 2]);
+  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + curVx * vScale, by); ctx.stroke();
+  // Component Vy (Vertical)
+  ctx.strokeStyle = C.rose;
+  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, by - curVy * vScale); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Perpendicular projection lines to axis
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx, oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(ox, by); ctx.stroke();
+
+  // Resultant Velocity Vector
+  ctx.strokeStyle = C.amber; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + curVx * vScale, by - curVy * vScale); ctx.stroke();
+  
+  // Arrowhead
+  const arrowAngle = Math.atan2(-curVy, curVx);
+  ctx.fillStyle = C.amber;
   ctx.beginPath();
   ctx.moveTo(bx + curVx * vScale, by - curVy * vScale);
-  ctx.lineTo(bx + curVx * vScale - 8 * Math.cos(angle - 0.4), by - curVy * vScale + 8 * Math.sin(angle - 0.4));
-  ctx.lineTo(bx + curVx * vScale - 8 * Math.cos(angle + 0.4), by - curVy * vScale + 8 * Math.sin(angle + 0.4));
+  ctx.lineTo(bx + curVx * vScale - 6 * Math.cos(arrowAngle - 0.45), by - curVy * vScale + 6 * Math.sin(arrowAngle - 0.45));
+  ctx.lineTo(bx + curVx * vScale - 6 * Math.cos(arrowAngle + 0.45), by - curVy * vScale + 6 * Math.sin(arrowAngle + 0.45));
   ctx.fill();
 
-  // Ball – cartoon style with thick outline
-  ctx.shadowColor = 'rgba(0,0,0,.1)'; ctx.shadowBlur = 8; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
-  const ballGrad = ctx.createRadialGradient(bx - 4, by - 4, 2, bx, by, 14);
-  ballGrad.addColorStop(0, '#B8E0FF'); ballGrad.addColorStop(1, C.blue);
+  // Ball - Sleek Gloss Sphere
+  ctx.shadowColor = C.indigoGlow; ctx.shadowBlur = 10;
+  const ballGrad = ctx.createRadialGradient(bx - 3, by - 3, 1, bx, by, 10);
+  ballGrad.addColorStop(0, '#FFFFFF');
+  ballGrad.addColorStop(0.3, '#A5B4FC');
+  ballGrad.addColorStop(1, C.indigo);
   ctx.beginPath(); ctx.fillStyle = ballGrad;
-  ctx.arc(bx, by, 14, 0, Math.PI * 2); ctx.fill();
-  ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
-  // Thick outline
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2.5;
-  ctx.beginPath(); ctx.arc(bx, by, 14, 0, Math.PI * 2); ctx.stroke();
-  // Cute highlight
-  ctx.fillStyle = 'rgba(255,255,255,.5)'; ctx.beginPath();
-  ctx.arc(bx - 5, by - 5, 4, 0, Math.PI * 2); ctx.fill();
+  ctx.arc(bx, by, 10, 0, Math.PI * 2); ctx.fill();
+  ctx.shadowBlur = 0;
+  
+  // Clean border
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(bx, by, 10, 0, Math.PI * 2); ctx.stroke();
 
-  // Time label
-  ctx.fillStyle = C.text; ctx.font = 'bold 16px Inter'; ctx.textAlign = 'left';
-  ctx.fillText(`t = ${t.toFixed(2)} s`, ox + 6, 24);
-  ctx.fillStyle = C.muted; ctx.font = '14px Inter';
-  ctx.fillText(`v = ${Math.sqrt(curVx ** 2 + curVy ** 2).toFixed(1)} m/s`, ox + 6, 42);
+  // Live HUD Follow
+  const curV = Math.sqrt(curVx ** 2 + curVy ** 2);
+  drawHUD(bx, by, [
+    `v = ${curV.toFixed(1)} m/s`,
+    `x = ${(vx * t).toFixed(1)}m, y = ${Math.max(0, (vy * t - .5 * g * t * t)).toFixed(1)}m`
+  ]);
+
+  // Static readout top-left
+  ctx.fillStyle = C.text; ctx.font = 'bold 12px var(--font-title)'; ctx.textAlign = 'left';
+  ctx.fillText(`t = ${t.toFixed(2)} s`, ox + 15, 34);
 }
 
-// ── PENDULUM (RK4) ──
+// ── PENDULUM DAO ĐỘNG CON LẮC DRAWING ──
 function drawPendulum(dt) {
   const W = canvas.width, H = canvas.height;
-  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H); drawGrid();
+  ctx.clearRect(0, 0, W, H); drawGrid();
 
-  const L = p.length || 1.5, g = p.gravity || 9.8;
-  const STEPS = 12;
+  const L = p.length, g = p.gravity;
+  const STEPS = 15;
   if (running) {
     const subDt = dt * simSpeed / STEPS;
     for (let i = 0; i < STEPS; i++) {
       const res = rk4Step(pend.theta, pend.omega, subDt, g, L);
       pend.theta = res.theta; pend.omega = res.omega;
     }
-    pend.thetaHistory = pend.thetaHistory || [];
     pend.thetaHistory.push(pend.theta);
-    if (pend.thetaHistory.length > 200) pend.thetaHistory.shift();
+    if (pend.thetaHistory.length > 220) pend.thetaHistory.shift();
   }
 
-  const cx = W / 2, cy = 100;
-  const pxL = Math.min(L * 130, H - 170);
+  const cx = W / 2, cy = 70;
+  const pxL = Math.min(L * 140, H - 150);
   const bx = cx + Math.sin(pend.theta) * pxL;
   const by = cy + Math.cos(pend.theta) * pxL;
 
-  // Vạch vị trí cân bằng
-  ctx.setLineDash([3, 5]); ctx.strokeStyle = 'rgba(45,43,61,.12)'; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx, cy + pxL); ctx.stroke();
+  // Equilibrium Line (Dây dọi)
+  ctx.setLineDash([4, 4]); ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx, cy + pxL + 20); ctx.stroke();
   ctx.setLineDash([]);
 
-  // Vạch biên độ
-  const th0 = (p.amplitude ?? 45) * Math.PI / 180;
-  ctx.setLineDash([3, 5]); ctx.strokeStyle = 'rgba(245,158,11,.25)'; ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.moveTo(cx, cy);
-  ctx.lineTo(cx + Math.sin(th0) * pxL, cy + Math.cos(th0) * pxL); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cx, cy);
-  ctx.lineTo(cx - Math.sin(th0) * pxL, cy + Math.cos(th0) * pxL); ctx.stroke();
-  ctx.setLineDash([]);
+  // Amplitude markers
+  const th0 = p.amplitude * Math.PI / 180;
+  ctx.strokeStyle = 'rgba(245, 158, 11, 0.15)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.sin(th0) * pxL, cy + Math.cos(th0) * pxL); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx - Math.sin(th0) * pxL, cy - Math.cos(th0) * -pxL); ctx.stroke();
 
-  // Arc hiển thị góc
-  ctx.beginPath(); ctx.strokeStyle = 'rgba(84,160,255,.45)'; ctx.lineWidth = 2;
-  const arcR = 50;
+  // Angular displacement arc indicator
+  ctx.beginPath(); ctx.strokeStyle = 'rgba(99, 102, 241, 0.5)'; ctx.lineWidth = 1.5;
+  const arcR = 40;
   if (pend.theta >= 0) {
     ctx.arc(cx, cy, arcR, Math.PI / 2, Math.PI / 2 - pend.theta, true);
   } else {
     ctx.arc(cx, cy, arcR, Math.PI / 2, Math.PI / 2 - pend.theta, false);
   }
   ctx.stroke();
-  ctx.fillStyle = C.blue; ctx.font = 'bold 16px Inter'; ctx.textAlign = 'center';
-  ctx.fillText(`${(pend.theta * 180 / Math.PI).toFixed(1)}°`, cx + Math.sin(pend.theta / 2) * 65, cy + Math.cos(pend.theta / 2) * 65);
+  
+  ctx.fillStyle = C.indigo; ctx.font = 'bold 11px var(--font-mono)'; ctx.textAlign = 'center';
+  ctx.fillText(`${(pend.theta * 180 / Math.PI).toFixed(0)}°`, cx + Math.sin(pend.theta / 2) * 56, cy + Math.cos(pend.theta / 2) * 56);
 
-  // Trail (afterimage)
-  pend.trail = pend.trail || [];
-  pend.trail.push({ x: bx, y: by });
-  if (pend.trail.length > 80) pend.trail.shift();
-  pend.trail.forEach((pt, i) => {
-    ctx.globalAlpha = (i / pend.trail.length) * 0.15;
-    ctx.beginPath(); ctx.fillStyle = C.blue;
-    ctx.arc(pt.x, pt.y, 16, 0, Math.PI * 2); ctx.fill();
-  });
-  ctx.globalAlpha = 1;
-
-  // Giá đỡ (neon style)
-  ctx.fillStyle = 'rgba(124, 92, 252, 0.2)';
-  ctx.fillRect(cx - 40, 0, 80, cy);
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2.5;
-  ctx.strokeRect(cx - 40, 0, 80, cy);
-  ctx.fillStyle = 'rgba(124, 92, 252, 0.4)'; ctx.fillRect(cx - 48, cy - 4, 96, 8);
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2;
-  ctx.strokeRect(cx - 48, cy - 4, 96, 8);
-  ctx.fillStyle = '#FFD93D'; ctx.beginPath(); ctx.arc(cx, cy, 7, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.arc(cx, cy, 7, 0, Math.PI * 2); ctx.stroke();
-
-  // Dây — thick cartoon rope
-  ctx.strokeStyle = C.border; ctx.lineWidth = 4;
-  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(bx, by); ctx.stroke();
-  ctx.strokeStyle = '#8B7EC8'; ctx.lineWidth = 2;
+  // Pendulum rod - Steel wire look
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(bx, by); ctx.stroke();
 
-  // Quả lắc – cartoon style
-  ctx.shadowColor = 'rgba(0,0,0,.12)'; ctx.shadowBlur = 6; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
-  const gr = ctx.createRadialGradient(bx - 6, by - 6, 3, bx, by, 24);
-  gr.addColorStop(0, '#B8E0FF'); gr.addColorStop(1, C.blue);
-  ctx.beginPath(); ctx.fillStyle = gr; ctx.arc(bx, by, 24, 0, Math.PI * 2); ctx.fill();
-  ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
-  // Thick outline
-  ctx.strokeStyle = C.border; ctx.lineWidth = 3;
-  ctx.beginPath(); ctx.arc(bx, by, 24, 0, Math.PI * 2); ctx.stroke();
-  // Cute highlight
-  ctx.fillStyle = 'rgba(255,255,255,.45)'; ctx.beginPath();
-  ctx.arc(bx - 8, by - 8, 7, 0, Math.PI * 2); ctx.fill();
+  // Bob shadow on wall (slightly offset)
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+  ctx.beginPath(); ctx.arc(bx + 15, by + 15, 18, 0, Math.PI * 2); ctx.fill();
 
-  // Energy bar
-  const E_total = g * L * (1 - Math.cos(th0));
-  const E_kin = 0.5 * L * L * pend.omega * pend.omega;
-  const E_pot = g * L * (1 - Math.cos(pend.theta));
-  const barW = 160, barX = W - barW - 24, barY = 22, barH = 12;
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.05)'; ctx.fillRect(barX, barY, barW, barH * 2 + 4);
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)'; ctx.lineWidth = 1.5;
-  ctx.strokeRect(barX, barY, barW, barH * 2 + 4);
-  const kinW = barW * Math.min(E_kin / Math.max(E_total, 1e-9), 1);
-  const potW = barW * Math.min(E_pot / Math.max(E_total, 1e-9), 1);
-  ctx.fillStyle = C.blue; ctx.fillRect(barX, barY, kinW, barH);
-  ctx.fillStyle = C.orange; ctx.fillRect(barX, barY + barH + 4, potW, barH);
-  ctx.fillStyle = C.text; ctx.font = 'bold 13px Inter'; ctx.textAlign = 'right';
-  ctx.fillText('Eₖ (động năng)', barX - 6, barY + 10);
-  ctx.fillText('Eₜ (thế năng)', barX - 6, barY + barH + 14);
+  // Bob - Glass mirror chrome look
+  ctx.shadowColor = C.indigoGlow; ctx.shadowBlur = 15;
+  const sphereGrad = ctx.createRadialGradient(bx - 5, by - 5, 2, bx, by, 18);
+  sphereGrad.addColorStop(0, '#FFFFFF');
+  sphereGrad.addColorStop(0.2, '#C7D2FE');
+  sphereGrad.addColorStop(0.8, '#4F46E5');
+  sphereGrad.addColorStop(1, '#312E81');
+  
+  ctx.beginPath(); ctx.fillStyle = sphereGrad; ctx.arc(bx, by, 18, 0, Math.PI * 2); ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(bx, by, 18, 0, Math.PI * 2); ctx.stroke();
 
-  // θ-t graph (mini)
+  // Hanging Stand (Giá đỡ cơ khí)
+  ctx.fillStyle = C.bg2; ctx.strokeStyle = 'rgba(255,255,255,0.12)'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.roundRect(cx - 30, cy - 10, 60, 10, 4); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#64748B'; ctx.beginPath(); ctx.arc(cx, cy - 5, 4, 0, Math.PI*2); ctx.fill();
+
+  // Oscilloscope Real-time Waveform Display
   if (pend.thetaHistory && pend.thetaHistory.length > 2) {
-    const gx = 20, gy = H - 100, gw = 180, gh = 70;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
-    ctx.fillRect(gx, gy, gw, gh);
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)'; ctx.lineWidth = 1.5;
+    const gx = 20, gy = H - 90, gw = 180, gh = 64;
+    
+    // Graph Panel Box
+    ctx.fillStyle = '#030508'; ctx.fillRect(gx, gy, gw, gh);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)'; ctx.lineWidth = 1;
     ctx.strokeRect(gx, gy, gw, gh);
-    // Vẽ đường θ(t)
-    ctx.beginPath(); ctx.strokeStyle = C.blue; ctx.lineWidth = 2;
+    
+    // Waveform grid lines
+    ctx.fillStyle = 'rgba(16, 185, 129, 0.05)';
+    for (let xi = gx + 20; xi < gx + gw; xi += 20) ctx.fillRect(xi, gy, 1, gh);
+    for (let yi = gy + 10; yi < gy + gh; yi += 10) ctx.fillRect(gx, yi, gw, 1);
+
+    // Midline
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.fillRect(gx, gy + gh / 2, gw, 1);
+
+    // Plot values
+    ctx.beginPath(); ctx.strokeStyle = C.mint; ctx.lineWidth = 1.5;
     const hist = pend.thetaHistory;
     hist.forEach((th, i) => {
       const hx = gx + (i / hist.length) * gw;
-      const hy = gy + gh / 2 - (th / Math.max(th0, 0.1)) * gh / 2.2;
+      const hy = gy + gh / 2 - (th / th0) * (gh / 2.2);
       i === 0 ? ctx.moveTo(hx, hy) : ctx.lineTo(hx, hy);
     });
     ctx.stroke();
-    ctx.fillStyle = C.text; ctx.font = 'bold 14px Inter'; ctx.textAlign = 'left';
-    ctx.fillText('θ(t)', gx + 6, gy - 6);
+
+    ctx.fillStyle = C.text; ctx.font = 'bold 9px var(--font-mono)'; ctx.textAlign = 'left';
+    ctx.fillText('OSCILLOSCOPE θ(t)', gx + 6, gy - 8);
   }
 }
 
-// ── COLLISION (velocity-accurate) ──
+// ── COLLISION SIMULATION DRAWING ──
 function drawCollision() {
   const W = canvas.width, H = canvas.height;
-  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H); drawGrid();
+  ctx.clearRect(0, 0, W, H); drawGrid();
 
-  // Floor (neon style)
-  const floorY = H - 80;
-  ctx.fillStyle = 'rgba(0, 255, 102, 0.05)'; ctx.fillRect(0, floorY, W, H - floorY);
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2.5;
+  const floorY = H - 90;
+  // Sleek tech floor line
+  ctx.fillStyle = 'rgba(255,255,255,0.01)'; ctx.fillRect(0, floorY, W, H - floorY);
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)'; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(0, floorY); ctx.lineTo(W, floorY); ctx.stroke();
 
   const { r1, r2, v1i, v2i, v1f, v2f, by, velScale } = coll;
@@ -836,197 +949,215 @@ function drawCollision() {
       if (coll.x1 + r1 >= coll.x2 - r2) {
         coll.x1 = coll.x2 - r1 - r2;
         coll.phase = 'post'; coll.postTimer = 0; coll.flash = 1;
-        spawnParticles(coll.x1 + r1, coll.by - r1/2, C.cyan, 25);
-        spawnParticles(coll.x2 - r2, coll.by - r2/2, C.red, 25);
+        // Collision explosion rings
+        coll.shockwaves.push({ x: coll.x1 + r1, y: by - r1, r: 2, maxR: 45, life: 1.0 });
+        spawnParticles(coll.x1 + r1, by - r1, C.indigo, 15);
       }
     } else {
       coll.x1 += v1f * velScale;
       coll.x2 += v2f * velScale;
       coll.postTimer++;
-      if (coll.flash > 0) coll.flash -= 0.03;
-      if (coll.postTimer > 150) {
-        coll.x1 = r1 + 30; coll.x2 = W / 2 + 80;
+      if (coll.flash > 0) coll.flash -= 0.025;
+      if (coll.postTimer > 180) {
+        coll.x1 = r1 + 40; coll.x2 = W / 2 + 100;
         coll.phase = 'approach'; coll.flash = 0;
       }
     }
   }
 
-  // Flash effect at collision
-  if (coll.flash > 0) {
-    const cx = (coll.x1 + coll.x2) / 2;
-    const flashGrad = ctx.createRadialGradient(cx, by - r1, 0, cx, by - r1, 80);
-    flashGrad.addColorStop(0, `rgba(255,255,255,${coll.flash * 0.5})`);
-    flashGrad.addColorStop(1, 'transparent');
-    ctx.fillStyle = flashGrad;
-    ctx.fillRect(0, 0, W, H);
+  // Draw active shockwaves
+  if (coll.shockwaves) {
+    for (let i = coll.shockwaves.length - 1; i >= 0; i--) {
+      const sw = coll.shockwaves[i];
+      sw.r += 2.2;
+      sw.life -= 0.02;
+      if (sw.life <= 0) {
+        coll.shockwaves.splice(i, 1);
+      } else {
+        ctx.strokeStyle = `rgba(255, 255, 255, ${sw.life * 0.4})`;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
   }
 
-  const drawBall = (x, r, color, label, vel, mass) => {
+  // Subtle background glow on collision impact
+  if (coll.flash > 0) {
+    const cx = (coll.x1 + coll.x2) / 2;
+    const impactGrd = ctx.createRadialGradient(cx, by - r1, 2, cx, by - r1, 60);
+    impactGrd.addColorStop(0, `rgba(99, 102, 241, ${coll.flash * 0.15})`);
+    impactGrd.addColorStop(1, 'transparent');
+    ctx.fillStyle = impactGrd; ctx.fillRect(0, 0, W, H);
+  }
+
+  // Helper function to render modern glass-shaded balls
+  const renderBall = (x, r, color, label, vel, mass) => {
     const yc = by - r;
-    // Shadow
-    ctx.fillStyle = 'rgba(0,0,0,.2)';
-    ctx.beginPath(); ctx.ellipse(x, by + 3, r * .9, r * .25, 0, 0, Math.PI * 2); ctx.fill();
-    // Ball — cartoon style
-    ctx.shadowColor = 'rgba(0,0,0,.1)'; ctx.shadowBlur = 4; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
-    const gr = ctx.createRadialGradient(x - r / 3, yc - r / 3, r / 6, x, yc, r);
-    gr.addColorStop(0, color + 'dd'); gr.addColorStop(1, color + '88');
-    ctx.beginPath(); ctx.fillStyle = gr; ctx.arc(x, yc, r, 0, Math.PI * 2); ctx.fill();
-    ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
-    // Thick outline
-    ctx.strokeStyle = C.border; ctx.lineWidth = 3;
+    // Ground Shadow shadow
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    ctx.beginPath(); ctx.ellipse(x, by + 2, r * 0.95, r * 0.2, 0, 0, Math.PI * 2); ctx.fill();
+
+    // 3D Sphere shading
+    const sphereGrd = ctx.createRadialGradient(x - r/3, yc - r/3, r/8, x, yc, r);
+    sphereGrd.addColorStop(0, '#FFFFFF');
+    sphereGrd.addColorStop(0.3, color);
+    sphereGrd.addColorStop(1, 'rgba(0, 0, 0, 0.45)');
+    ctx.fillStyle = sphereGrd;
+    ctx.beginPath(); ctx.arc(x, yc, r, 0, Math.PI * 2); ctx.fill();
+
+    // High quality shell line
+    ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.arc(x, yc, r, 0, Math.PI * 2); ctx.stroke();
-    // Highlight
-    ctx.fillStyle = 'rgba(255,255,255,.4)'; ctx.beginPath();
-    ctx.arc(x - r * .25, yc - r * .25, r * .3, 0, Math.PI * 2); ctx.fill();
-    // Label
-    ctx.fillStyle = '#fff'; ctx.font = `bold ${Math.max(r * .55, 14)}px Inter`;
+
+    // Label tag
+    ctx.fillStyle = '#FFFFFF'; ctx.font = `bold ${Math.max(r * 0.5, 11)}px var(--font-title)`;
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText(label, x, yc);
-    ctx.fillStyle = C.text; ctx.font = 'bold 13px Inter'; ctx.textBaseline = 'alphabetic';
-    ctx.fillText(`${mass.toFixed(1)} kg`, x, yc + r + 18);
+    
+    ctx.fillStyle = C.muted; ctx.font = '11px var(--font-mono)'; ctx.textBaseline = 'top';
+    ctx.fillText(`${mass.toFixed(1)} kg`, x, yc + r + 10);
 
-    // Velocity arrow
+    // Vector velocity arrows
     if (Math.abs(vel) > 0.05) {
-      const arrowLen = Math.min(Math.abs(vel) * 15, 120) * Math.sign(vel);
-      const ay = yc - r - 14;
-      ctx.strokeStyle = color; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(x, ay); ctx.lineTo(x + arrowLen, ay); ctx.stroke();
-      // Arrowhead
       const dir = Math.sign(vel);
+      const arrowLen = Math.min(Math.abs(vel) * 12, 100) * dir;
+      const ay = yc - r - 10;
+      
+      ctx.strokeStyle = color; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, ay); ctx.lineTo(x + arrowLen, ay); ctx.stroke();
+      
+      // Arrow tip
       ctx.fillStyle = color; ctx.beginPath();
       ctx.moveTo(x + arrowLen, ay);
-      ctx.lineTo(x + arrowLen - 8 * dir, ay - 4);
-      ctx.lineTo(x + arrowLen - 8 * dir, ay + 4); ctx.fill();
-      ctx.fillStyle = color; ctx.font = 'bold 14px Inter'; ctx.textAlign = 'center';
-      ctx.fillText(`${vel.toFixed(1)} m/s`, x + arrowLen / 2, ay - 10);
+      ctx.lineTo(x + arrowLen - 6 * dir, ay - 3);
+      ctx.lineTo(x + arrowLen - 6 * dir, ay + 3); ctx.fill();
+      
+      ctx.font = 'bold 10px var(--font-mono)'; ctx.textAlign = 'center';
+      ctx.fillText(`${vel.toFixed(1)} m/s`, x + arrowLen/2, ay - 14);
     }
   };
 
-  const curV1 = coll.phase === 'approach' ? v1i : v1f;
-  const curV2 = coll.phase === 'approach' ? v2i : v2f;
-  drawBall(coll.x1, r1, C.red, 'm₁', curV1, p.m1);
-  drawBall(coll.x2, r2, C.blue, 'm₂', curV2, p.m2);
+  const currentV1 = coll.phase === 'approach' ? v1i : v1f;
+  const currentV2 = coll.phase === 'approach' ? v2i : v2f;
 
-  // Phase label
-  ctx.fillStyle = coll.phase === 'approach' ? C.text : C.green;
-  ctx.font = 'bold 18px Inter'; ctx.textAlign = 'center';
-  ctx.fillText(coll.phase === 'approach' ? '⏩ Trước va chạm' : '✓ Sau va chạm', W / 2, 28);
+  renderBall(coll.x1, r1, C.rose, 'm₁', currentV1, p.m1);
+  renderBall(coll.x2, r2, C.cyan, 'm₂', currentV2, p.m2);
 
-  // Momentum bar comparison
-  const pi = p.m1 * v1i + p.m2 * (p.v2 || 0);
-  const pf = p.m1 * v1f + p.m2 * v2f;
-  ctx.fillStyle = C.muted; ctx.font = 'bold 14px Inter'; ctx.textAlign = 'left';
-  ctx.fillText(`p = ${(coll.phase === 'approach' ? pi : pf).toFixed(2)} kg·m/s (bảo toàn)`, 14, H - 18);
+  // Status Indicator Text
+  ctx.fillStyle = coll.phase === 'approach' ? C.text : C.indigo;
+  ctx.font = 'bold 13px var(--font-title)'; ctx.textAlign = 'center';
+  ctx.fillText(coll.phase === 'approach' ? '● TIẾN TRÌNH: TRƯỚC VA CHẠM' : '✦ KẾT QUẢ: SAU VA CHẠM', W / 2, 28);
 }
 
-// ── GAS (Maxwell-Boltzmann with inter-particle collisions) ──
+// ── GAS SIMULATION DRAWING ──
 function drawGas() {
   const W = canvas.width, H = canvas.height;
-  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+  ctx.clearRect(0, 0, W, H);
 
   const { cx, side, topY, botY, leftX, rightX } = gasBox();
-  const T = p.gT || 300, sigma = 2.0 * Math.sqrt(T / 300);
+  const T = p.gT, sigma = 2.0 * Math.sqrt(T / 300);
 
   if (running && gasState.particles) {
     gasState.wallHits = 0;
     gasState.particles.forEach(pt => {
       pt.x += pt.vx * simSpeed;
       pt.y += pt.vy * simSpeed;
-      if (pt.x < leftX + 6) { pt.vx = Math.abs(pt.vx); pt.x = leftX + 6; gasState.wallHits++; }
-      if (pt.x > rightX - 6) { pt.vx = -Math.abs(pt.vx); pt.x = rightX - 6; gasState.wallHits++; }
-      if (pt.y < topY + 6) { pt.vy = Math.abs(pt.vy); pt.y = topY + 6; gasState.wallHits++; }
-      if (pt.y > botY - 6) { pt.vy = -Math.abs(pt.vy); pt.y = botY - 6; gasState.wallHits++; }
+      
+      // Elastic wall bounces
+      if (pt.x < leftX + 5) { pt.vx = Math.abs(pt.vx); pt.x = leftX + 5; gasState.wallHits++; }
+      if (pt.x > rightX - 5) { pt.vx = -Math.abs(pt.vx); pt.x = rightX - 5; gasState.wallHits++; }
+      if (pt.y < topY + 5) { pt.vy = Math.abs(pt.vy); pt.y = topY + 5; gasState.wallHits++; }
+      if (pt.y > botY - 5) { pt.vy = -Math.abs(pt.vy); pt.y = botY - 5; gasState.wallHits++; }
     });
   }
 
-  // Container – cartoon style with thick border
-  ctx.fillStyle = 'rgba(184,224,255,.15)';
-  ctx.fillRect(leftX, topY, side, side);
-  ctx.strokeStyle = C.border; ctx.lineWidth = 3;
+  // Piston container box (glass look)
+  ctx.fillStyle = 'rgba(255,255,255,0.01)'; ctx.fillRect(leftX, topY, side, side);
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)'; ctx.lineWidth = 2;
   ctx.strokeRect(leftX, topY, side, side);
 
-  // Corner accents
-  const cl = 14;
-  ctx.strokeStyle = C.blue; ctx.lineWidth = 3;
-  [[leftX, topY, 1, 1], [rightX, topY, -1, 1], [leftX, botY, 1, -1], [rightX, botY, -1, -1]].forEach(([x, y, dx, dy]) => {
-    ctx.beginPath(); ctx.moveTo(x, y + cl * dy); ctx.lineTo(x, y); ctx.lineTo(x + cl * dx, y); ctx.stroke();
-  });
-
-  // Piston (cartoon style)
-  ctx.fillStyle = 'rgba(124, 92, 252, 0.2)'; ctx.fillRect(leftX, topY - 16, side, 16);
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2;
-  ctx.strokeRect(leftX, topY - 16, side, 16);
-  ctx.fillStyle = 'rgba(124, 92, 252, 0.4)'; ctx.fillRect(cx - 10, topY - 40, 20, 24);
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2;
-  ctx.strokeRect(cx - 10, topY - 40, 20, 24);
-  ctx.fillStyle = '#FFD93D'; ctx.beginPath(); ctx.arc(cx, topY - 40, 7, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.arc(cx, topY - 40, 7, 0, Math.PI * 2); ctx.stroke();
-
-  // Particles – color by speed
+  // Gas molecules rendering with velocity-colored glow vector tails
   if (gasState.particles) {
     gasState.particles.forEach(pt => {
-      const spd = Math.sqrt(pt.vx ** 2 + pt.vy ** 2);
-      const ratio = Math.min(spd / (sigma * 2.5), 1);
-      // Blue → Yellow → Red
+      const velocity = Math.sqrt(pt.vx ** 2 + pt.vy ** 2);
+      const ratio = Math.min(velocity / (sigma * 2.2), 1.0);
+      
+      // Blend Blue (slow) -> Mint (medium) -> Amber/Red (fast)
       let r, g, b;
       if (ratio < 0.5) {
-        const t2 = ratio * 2;
-        r = Math.round(108 + (245 - 108) * t2);
-        g = Math.round(140 + (158 - 140) * t2);
-        b = Math.round(255 + (11 - 255) * t2);
+        const factor = ratio * 2;
+        r = Math.round(99 + (16 - 99) * factor);
+        g = Math.round(102 + (185 - 102) * factor);
+        b = Math.round(241 + (129 - 241) * factor);
       } else {
-        const t2 = (ratio - .5) * 2;
-        r = Math.round(245 + (239 - 245) * t2);
-        g = Math.round(158 + (68 - 158) * t2);
-        b = Math.round(11 + (68 - 11) * t2);
+        const factor = (ratio - 0.5) * 2;
+        r = Math.round(16 + (239 - 16) * factor);
+        g = Math.round(185 + (68 - 185) * factor);
+        b = Math.round(129 + (68 - 129) * factor);
       }
-      ctx.shadowColor = `rgba(${r},${g},${b},.4)`; ctx.shadowBlur = 6;
-      ctx.beginPath(); ctx.fillStyle = `rgb(${r},${g},${b})`;
-      ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2); ctx.fill();
+
+      // Sleek tech vector lines representing velocity trails
+      ctx.strokeStyle = `rgba(${r},${g},${b},0.3)`; ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(pt.x - pt.vx * 1.5, pt.y - pt.vy * 1.5);
+      ctx.lineTo(pt.x, pt.y);
+      ctx.stroke();
+
+      // Molecule core dot
+      ctx.fillStyle = `rgb(${r},${g},${b})`;
+      ctx.beginPath(); ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2); ctx.fill();
     });
-    ctx.shadowBlur = 0;
   }
 
-  // Labels
-  const n = p.gn || 1, V = p.gV || 22;
-  const P = (n * 0.0821 * T / V).toFixed(3);
-  ctx.fillStyle = C.text; ctx.font = 'bold 16px Inter'; ctx.textAlign = 'left';
-  const lx = rightX + 22, ly = topY + 24;
-  ctx.fillText(`T = ${T} K`, lx, ly);
-  ctx.fillText(`V = ${V} L`, lx, ly + 24);
-  ctx.fillText(`n = ${n} mol`, lx, ly + 48);
-  ctx.fillStyle = C.blue; ctx.font = 'bold 18px Inter';
-  ctx.fillText(`P = ${P} atm`, lx, ly + 78);
+  // Mechanical Piston Head drawing
+  ctx.fillStyle = '#1E293B'; ctx.fillRect(leftX - 4, topY - 10, side + 8, 10);
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.lineWidth = 1;
+  ctx.strokeRect(leftX - 4, topY - 10, side + 8, 10);
+  ctx.fillStyle = '#64748B'; ctx.fillRect(cx - 8, topY - 26, 16, 16);
 
-  // Speed legend
-  ctx.fillStyle = C.muted; ctx.font = 'bold 13px Inter'; ctx.textAlign = 'center';
-  ctx.fillText('chậm → nhanh', cx, botY + 28);
-  const legW = 100;
-  for (let i = 0; i < legW; i++) {
-    const ratio = i / legW;
-    let lr, lg, lb;
-    if (ratio < .5) { lr = Math.round(108 + (245 - 108) * ratio * 2); lg = Math.round(140 + (158 - 140) * ratio * 2); lb = Math.round(255 + (11 - 255) * ratio * 2); }
-    else { const t2 = (ratio - .5) * 2; lr = Math.round(245 + (239 - 245) * t2); lg = Math.round(158 + (68 - 158) * t2); lb = Math.round(11 + (68 - 11) * t2); }
-    ctx.fillStyle = `rgb(${lr},${lg},${lb})`;
-    ctx.fillRect(cx - legW / 2 + i, botY + 34, 1, 6);
+  // Digital readout panel inside canvas
+  const P = (p.gn * 0.0821 * T / p.gV).toFixed(3);
+  ctx.fillStyle = C.text; ctx.font = 'bold 12px var(--font-title)'; ctx.textAlign = 'left';
+  const lx = rightX + 24, ly = topY + 20;
+  ctx.fillText(`T = ${T} K`, lx, ly);
+  ctx.fillText(`V = ${p.gV} L`, lx, ly + 20);
+  ctx.fillText(`n = ${p.gn} mol`, lx, ly + 40);
+  ctx.fillStyle = C.sky; ctx.font = 'bold 14px var(--font-mono)';
+  ctx.fillText(`P = ${P} atm`, lx, ly + 68);
+
+  // Velocity distribution legend
+  ctx.fillStyle = C.muted; ctx.font = '9px var(--font-mono)'; ctx.textAlign = 'center';
+  ctx.fillText('VẬN TỐC HẠT (CHẬM → NHANH)', cx, botY + 16);
+  const barW = 120;
+  for (let i = 0; i < barW; i++) {
+    const ratio = i / barW;
+    let r, g, b;
+    if (ratio < 0.5) {
+      const factor = ratio * 2; r = Math.round(99 + (16 - 99) * factor); g = Math.round(102 + (185 - 102) * factor); b = Math.round(241 + (129 - 241) * factor);
+    } else {
+      const factor = (ratio - 0.5) * 2; r = Math.round(16 + (239 - 16) * factor); g = Math.round(185 + (68 - 185) * factor); b = Math.round(129 + (68 - 129) * factor);
+    }
+    ctx.fillStyle = `rgb(${r},${g},${b})`;
+    ctx.fillRect(cx - barW / 2 + i, botY + 22, 1, 4);
   }
 }
 
-// ── CARNOT (real P-V diagram) ──
+// ── CARNOT CYCLE PV DIAGRAM & PISTON MODEL DRAWING ──
 function drawCarnot() {
   const W = canvas.width, H = canvas.height;
-  ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+  ctx.clearRect(0, 0, W, H);
 
-  const T1 = p.T1 || 600, T2 = p.T2 || 200;
+  const T1 = p.T1 || 650, T2 = p.T2 || 250;
   if (T2 >= T1) {
-    ctx.fillStyle = C.red; ctx.font = 'bold 20px Inter'; ctx.textAlign = 'center';
-    ctx.fillText('⚠ Cần Tc < Th để có chu trình Carnot!', W / 2, H / 2);
+    ctx.fillStyle = C.rose; ctx.font = 'bold 14px var(--font-title)'; ctx.textAlign = 'center';
+    ctx.fillText('⚠ Lỗi tham số: Yêu cầu nhiệt độ TC < TH', W / 2, H / 2);
     return;
   }
 
-  const GAMMA = 5 / 3, n = 1, R_c = 1;
-  const V1 = 1.0, V2 = 2.5;
+  const GAMMA = 5 / 3, n = 1.0, R_c = 1.0;
+  const V1 = 1.0, V2 = 2.4;
   const exp1 = 1 / (GAMMA - 1);
   const V3 = V2 * Math.pow(T1 / T2, exp1);
   const V4 = V1 * Math.pow(T1 / T2, exp1);
@@ -1035,100 +1166,146 @@ function drawCarnot() {
   const C_BC = PB * Math.pow(V2, GAMMA), C_DA = PD * Math.pow(V4, GAMMA);
 
   const allV = [V1, V2, V3, V4], allP = [PA, PB, PC, PD];
-  const Vmin = Math.min(...allV) * .8, Vmax = Math.max(...allV) * 1.15;
-  const Pmin = Math.min(...allP) * .8, Pmax = Math.max(...allP) * 1.15;
+  const Vmin = Math.min(...allV) * 0.8, Vmax = Math.max(...allV) * 1.15;
+  const Pmin = Math.min(...allP) * 0.8, Pmax = Math.max(...allP) * 1.15;
 
-  const ox = 90, oy = H - 65, pw = W - ox - 50, ph = oy - 60;
+  // Render P-V Diagram Axes (Technical look)
+  const ox = 70, oy = H - 55, pw = W - ox - 200, ph = oy - 45;
   const toX = v => ox + (v - Vmin) / (Vmax - Vmin) * pw;
   const toY = pp => oy - (pp - Pmin) / (Pmax - Pmin) * ph;
 
-  // Axes
-  ctx.strokeStyle = 'rgba(45,43,61,.25)'; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(ox, 50); ctx.lineTo(ox, oy); ctx.lineTo(W - 40, oy); ctx.stroke();
-  // Arrow tips
-  ctx.fillStyle = 'rgba(45,43,61,.25)';
-  ctx.beginPath(); ctx.moveTo(ox, 50); ctx.lineTo(ox - 5, 60); ctx.lineTo(ox + 5, 60); ctx.fill();
-  ctx.beginPath(); ctx.moveTo(W - 40, oy); ctx.lineTo(W - 50, oy - 5); ctx.lineTo(W - 50, oy + 5); ctx.fill();
-  ctx.fillStyle = C.text; ctx.font = 'bold 15px Inter';
-  ctx.textAlign = 'center'; ctx.fillText('V (m³)', W / 2, oy + 26);
-  ctx.save(); ctx.translate(ox - 26, H / 2);
-  ctx.rotate(-Math.PI / 2); ctx.fillText('P (Pa)', 0, 0);
-  ctx.restore();
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(ox, 30); ctx.lineTo(ox, oy); ctx.lineTo(ox + pw + 20, oy); ctx.stroke();
+  
+  ctx.fillStyle = C.muted; ctx.font = 'bold 9px var(--font-mono)';
+  ctx.textAlign = 'center'; ctx.fillText('V (m³)', ox + pw + 10, oy + 14);
+  ctx.save(); ctx.translate(ox - 14, 40); ctx.rotate(-Math.PI / 2); ctx.fillText('P (Pa)', 0, 0); ctx.restore();
 
-  // Fill cycle area
-  ctx.beginPath(); ctx.globalAlpha = 0.06;
+  // Cycle volume shading
+  ctx.beginPath(); ctx.globalAlpha = 0.03;
   const fillPts = [];
-  for (let i = 0; i <= 40; i++) { const v = V1 + (V2 - V1) * i / 40; fillPts.push([toX(v), toY(n * R_c * T1 / v)]); }
-  for (let i = 0; i <= 40; i++) { const v = V2 + (V3 - V2) * i / 40; fillPts.push([toX(v), toY(C_BC / Math.pow(v, GAMMA))]); }
-  for (let i = 0; i <= 40; i++) { const v = V3 + (V4 - V3) * i / 40; fillPts.push([toX(v), toY(n * R_c * T2 / v)]); }
-  for (let i = 0; i <= 40; i++) { const v = V4 + (V1 - V4) * i / 40; fillPts.push([toX(v), toY(C_DA / Math.pow(v, GAMMA))]); }
+  for (let i = 0; i <= 30; i++) { const v = V1 + (V2 - V1) * i / 30; fillPts.push([toX(v), toY(n * R_c * T1 / v)]); }
+  for (let i = 0; i <= 30; i++) { const v = V2 + (V3 - V2) * i / 30; fillPts.push([toX(v), toY(C_BC / Math.pow(v, GAMMA))]); }
+  for (let i = 0; i <= 30; i++) { const v = V3 + (V4 - V3) * i / 30; fillPts.push([toX(v), toY(n * R_c * T2 / v)]); }
+  for (let i = 0; i <= 30; i++) { const v = V4 + (V1 - V4) * i / 30; fillPts.push([toX(v), toY(C_DA / Math.pow(v, GAMMA))]); }
   ctx.moveTo(fillPts[0][0], fillPts[0][1]);
   fillPts.forEach(pt => ctx.lineTo(pt[0], pt[1]));
-  ctx.closePath(); ctx.fillStyle = C.blue; ctx.fill();
-  ctx.globalAlpha = 1;
+  ctx.closePath(); ctx.fillStyle = C.indigo; ctx.fill();
+  ctx.globalAlpha = 1.0;
 
-  // Draw curves
-  const drawCurve = (Vs, Ve, fn, color, lbl) => {
-    ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 3;
-    for (let i = 0; i <= 60; i++) { const v = Vs + (Ve - Vs) * i / 60; const pp = fn(v); i === 0 ? ctx.moveTo(toX(v), toY(pp)) : ctx.lineTo(toX(v), toY(pp)); }
+  // Plot Curves
+  const plotCurve = (Vs, Ve, fn, color) => {
+    ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 2.5;
+    for (let i = 0; i <= 50; i++) {
+      const v = Vs + (Ve - Vs) * i / 50;
+      i === 0 ? ctx.moveTo(toX(v), toY(fn(v))) : ctx.lineTo(toX(v), toY(fn(v)));
+    }
     ctx.stroke();
-    if (lbl) { const vm = (Vs + Ve) / 2; ctx.fillStyle = color; ctx.font = 'bold 13px Inter'; ctx.textAlign = 'center'; ctx.fillText(lbl, toX(vm), toY(fn(vm)) - 14); }
   };
 
-  drawCurve(V1, V2, v => n * R_c * T1 / v, C.red, `Đẳng nhiệt Th=${T1}K`);
-  drawCurve(V2, V3, v => C_BC / Math.pow(v, GAMMA), '#8b8fa3', 'Đoạn nhiệt');
-  drawCurve(V3, V4, v => n * R_c * T2 / v, C.blue, `Đẳng nhiệt Tc=${T2}K`);
-  drawCurve(V4, V1, v => C_DA / Math.pow(v, GAMMA), '#8b8fa3', '');
+  plotCurve(V1, V2, v => n * R_c * T1 / v, C.rose); // TH isothermal
+  plotCurve(V2, V3, v => C_BC / Math.pow(v, GAMMA), 'rgba(255,255,255,0.18)'); // Adiabatic expansion
+  plotCurve(V3, V4, v => n * R_c * T2 / v, C.sky); // TC isothermal
+  plotCurve(V4, V1, v => C_DA / Math.pow(v, GAMMA), 'rgba(255,255,255,0.18)'); // Adiabatic compression
 
-  // State points
-  [[V1, PA, 'A', C.red], [V2, PB, 'B', C.red], [V3, PC, 'C', C.blue], [V4, PD, 'D', C.blue]].forEach(([v, pp, lb, col]) => {
-    ctx.shadowColor = 'rgba(0,0,0,.1)'; ctx.shadowBlur = 4; ctx.shadowOffsetX = 2; ctx.shadowOffsetY = 2;
-    ctx.beginPath(); ctx.fillStyle = col; ctx.arc(toX(v), toY(pp), 8, 0, Math.PI * 2); ctx.fill();
-    ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0;
-    ctx.strokeStyle = C.border; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.arc(toX(v), toY(pp), 8, 0, Math.PI * 2); ctx.stroke();
-    ctx.fillStyle = C.text; ctx.font = 'bold 16px Inter'; ctx.textAlign = 'left';
-    ctx.fillText(lb, toX(v) + 12, toY(pp) - 8);
+  // Vertex Nodes
+  [[V1, PA, '1', C.rose], [V2, PB, '2', C.rose], [V3, PC, '3', C.sky], [V4, PD, '4', C.sky]].forEach(([v, pp, lb, col]) => {
+    ctx.beginPath(); ctx.fillStyle = col; ctx.arc(toX(v), toY(pp), 5, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(toX(v), toY(pp), 5, 0, Math.PI * 2); ctx.stroke();
+    
+    ctx.fillStyle = C.text; ctx.font = 'bold 11px var(--font-title)'; ctx.textAlign = 'left';
+    ctx.fillText(lb, toX(v) + 8, toY(pp) - 4);
   });
 
-  // Moving dot
-  if (running) carnotT = (carnotT + 0.003 * simSpeed) % 1;
-  const seg = Math.floor(carnotT * 4), frac = (carnotT * 4) % 1;
+  // Cycle running indicator dot
+  if (running) carnotT = (carnotT + 0.003 * simSpeed) % 1.0;
+  const seg = Math.floor(carnotT * 4), frac = (carnotT * 4) % 1.0;
   let dotV, dotP;
   if (seg === 0) { dotV = V1 + (V2 - V1) * frac; dotP = n * R_c * T1 / dotV; }
   else if (seg === 1) { dotV = V2 + (V3 - V2) * frac; dotP = C_BC / Math.pow(dotV, GAMMA); }
   else if (seg === 2) { dotV = V3 + (V4 - V3) * frac; dotP = n * R_c * T2 / dotV; }
   else { dotV = V4 + (V1 - V4) * frac; dotP = C_DA / Math.pow(dotV, GAMMA); }
-  ctx.shadowColor = C.orange; ctx.shadowBlur = 14;
-  ctx.beginPath(); ctx.fillStyle = C.orange;
-  ctx.arc(toX(dotV), toY(dotP), 8, 0, Math.PI * 2); ctx.fill();
+  
+  ctx.shadowColor = C.amber; ctx.shadowBlur = 10;
+  ctx.beginPath(); ctx.fillStyle = C.amber; ctx.arc(toX(dotV), toY(dotP), 6, 0, Math.PI * 2); ctx.fill();
   ctx.shadowBlur = 0;
 
-  // Info box (cartoon style)
-  const eta = (1 - T2 / T1) * 100;
-  const boxW = 260, boxH = 58;
-  ctx.fillStyle = 'rgba(11, 14, 20, 0.85)';
+  // ── WOW FEATURE: Real-time mechanical cylinder diagram ──
+  const cx_cyl = W - 100;
+  const cy_cyl = 70;
+  const cylW = 60;
+  const cylH = 100;
+
+  // Map volume dotV to piston displacement
+  const vRatio = (dotV - Vmin) / (Vmax - Vmin); 
+  const pistonY = cy_cyl + 10 + vRatio * (cylH - 30);
+
+  // Gas color mapping based on actual temperature
+  let gasColor;
+  if (seg === 0) {
+    gasColor = 'rgba(239, 68, 68, 0.20)'; // Hot red
+  } else if (seg === 1) {
+    // Red to Blue transition
+    const r = Math.round(239 - (239 - 99) * frac);
+    const g = Math.round(68 + (102 - 68) * frac);
+    const b = Math.round(68 + (241 - 68) * frac);
+    gasColor = `rgba(${r}, ${g}, ${b}, 0.20)`;
+  } else if (seg === 2) {
+    gasColor = 'rgba(99, 102, 241, 0.20)'; // Cold blue
+  } else {
+    // Blue to Red transition
+    const r = Math.round(99 + (239 - 99) * frac);
+    const g = Math.round(102 - (102 - 68) * frac);
+    const b = Math.round(241 - (241 - 68) * frac);
+    gasColor = `rgba(${r}, ${g}, ${b}, 0.20)`;
+  }
+
+  // Draw gas inside cylinder
+  ctx.fillStyle = gasColor;
+  ctx.fillRect(cx_cyl - cylW / 2, pistonY, cylW, cy_cyl + cylH - pistonY);
+
+  // Draw cylinder metal body
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)'; ctx.lineWidth = 4;
   ctx.beginPath();
-  ctx.roundRect(W / 2 - boxW / 2, 8, boxW, boxH, 14);
-  ctx.fill();
-  ctx.strokeStyle = C.border; ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  ctx.roundRect(W / 2 - boxW / 2, 8, boxW, boxH, 14);
+  ctx.moveTo(cx_cyl - cylW / 2, cy_cyl);
+  ctx.lineTo(cx_cyl - cylW / 2, cy_cyl + cylH);
+  ctx.lineTo(cx_cyl + cylW / 2, cy_cyl + cylH);
+  ctx.lineTo(cx_cyl + cylW / 2, cy_cyl);
   ctx.stroke();
-  ctx.fillStyle = C.text; ctx.font = 'bold 22px Inter'; ctx.textAlign = 'center';
-  ctx.fillText(`η = ${eta.toFixed(1)}%`, W / 2, 36);
-  ctx.fillStyle = C.muted; ctx.font = 'bold 13px Inter';
-  ctx.fillText(`Th=${T1}K  ·  Tc=${T2}K  ·  γ=5/3`, W / 2, 55);
+
+  // Piston shaft head
+  ctx.fillStyle = '#1E293B'; ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.roundRect(cx_cyl - cylW / 2 - 2, pistonY - 8, cylW + 4, 8, 2); ctx.fill(); ctx.stroke();
+
+  // Piston piston connecting rod
+  ctx.strokeStyle = '#64748B'; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.moveTo(cx_cyl, pistonY - 8); ctx.lineTo(cx_cyl, cy_cyl - 15); ctx.stroke();
+
+  // Cylinder tag
+  ctx.fillStyle = C.text; ctx.font = 'bold 9px var(--font-title)'; ctx.textAlign = 'center';
+  ctx.fillText('XI-LANH NHIỆT', cx_cyl, cy_cyl - 24);
+
+  // Cycle Phase Display
+  const phaseTexts = [
+    '1→2: GIÃN ĐẲNG NHIỆT (T_H)',
+    '2→3: GIÃN ĐOẠN NHIỆT',
+    '3→4: NÉN ĐẲNG NHIỆT (T_C)',
+    '4→1: NÉN ĐOẠN NHIỆT'
+  ];
+  ctx.fillStyle = seg === 0 || seg === 1 ? C.rose : C.sky;
+  ctx.font = 'bold 11px var(--font-title)';
+  ctx.fillText(phaseTexts[seg], W / 2, 28);
 }
 
-// ═══════════════════════════════════════════════════
-// ANIMATION LOOP
-// ═══════════════════════════════════════════════════
+// ── ANIMATION TICK LOOP ──
 function render(ts) {
   if (!lastTs) lastTs = ts;
   const dt = Math.min((ts - lastTs) / 1000, 0.05);
   lastTs = ts;
+  
   resizeCanvas();
+  
   switch (currentExp) {
     case 'projectile': drawProjectile(dt); break;
     case 'pendulum': drawPendulum(dt); break;
@@ -1136,16 +1313,28 @@ function render(ts) {
     case 'gas': drawGas(); break;
     case 'carnot': drawCarnot(); break;
   }
+  
   updateStats();
   updateVerification();
   updateAndDrawParticles();
   animId = requestAnimationFrame(render);
 }
 
-// ═══════════════════════════════════════════════════
-// EVENTS
-// ═══════════════════════════════════════════════════
-document.querySelectorAll('.nav-btn').forEach(btn => {
+// ── Event Bindings ──
+
+  // Collapsible Panels
+  document.querySelectorAll('.toggle-header').forEach(header => {
+    header.addEventListener('click', (e) => {
+      // Bỏ qua nếu bấm vào nút copy
+      if (e.target.closest('.copy-btn')) return;
+      const card = header.closest('.bento-card');
+      if (card) {
+        card.classList.toggle('collapsed');
+      }
+    });
+  });
+
+  document.querySelectorAll('.nav-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -1154,7 +1343,7 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     lastTs = null;
     renderUI();
     initPhysics();
-    // Close mobile sidebar
+    // Hide mobile sidebar
     const sb = document.getElementById('sidebar');
     if (sb) sb.classList.remove('open');
   });
@@ -1167,28 +1356,42 @@ btnPause.addEventListener('click', () => {
   btnPause.classList.toggle('paused', !running);
 });
 
-btnReset.addEventListener('click', () => { initPhysics(); lastTs = null; });
-window.addEventListener('resize', () => { initPhysics(); });
+  btnReset.addEventListener('click', () => { initPhysics(); lastTs = null; });
 
-// ── Mobile menu toggle ──
+  const btnZenMode = document.getElementById('btnZenMode');
+  if (btnZenMode) {
+    btnZenMode.addEventListener('click', () => {
+      document.querySelector('.workspace').classList.toggle('zen-mode');
+      setTimeout(() => {
+        resizeCanvas();
+        initPhysics();
+      }, 350);
+    });
+  }
+window.addEventListener('resize', () => { resizeCanvas(); initPhysics(); });
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mouseX = (e.clientX - rect.left) / zoomLevel;
+  mouseY = (e.clientY - rect.top) / zoomLevel;
+});
+canvas.addEventListener('mouseleave', () => {
+  mouseX = -1000;
+  mouseY = -1000;
+});
+
+// ── Mobile Menu controls ──
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
 if (menuToggle && sidebar) {
   menuToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
 }
 
-// ── Init ──
-renderUI();
-initPhysics();
-requestAnimationFrame(render);
-
-// ═══════════════════════════════════════════════════
-// VFX SYSTEM
-// ═══════════════════════════════════════════════════
+// ── Particle System VFX ──
 function spawnParticles(x, y, color, count) {
-  for(let i=0; i<count; i++) {
+  for (let i = 0; i < count; i++) {
     const ang = Math.random() * Math.PI * 2;
-    const speed = Math.random() * 8 + 2;
+    const speed = Math.random() * 6 + 1.5;
     vfxParticles.push({
       x, y,
       vx: Math.cos(ang) * speed,
@@ -1200,25 +1403,134 @@ function spawnParticles(x, y, color, count) {
 }
 
 function updateAndDrawParticles() {
+  const W = canvas.width, H = canvas.height;
+  
+  // Ambient Quantum Dust
+  if (Math.random() < 0.3) {
+    ambientParticles.push({
+      x: Math.random() * W,
+      y: H + 10,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: -Math.random() * 1.5 - 0.5,
+      life: Math.random() * 0.4 + 0.1,
+      size: Math.random() * 2 + 0.5,
+      color: Math.random() > 0.5 ? C.cyan : C.purple
+    });
+  }
+
+  ctx.shadowBlur = 10;
+  for (let i = ambientParticles.length - 1; i >= 0; i--) {
+    const pt = ambientParticles[i];
+    
+    // Tương tác chuột (Quantum repulsion)
+    if (mouseX > 0 && mouseY > 0) {
+      const dx = pt.x - mouseX;
+      const dy = pt.y - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        const force = (100 - dist) / 100;
+        pt.vx += (dx / dist) * force * 0.5;
+        pt.vy += (dy / dist) * force * 0.5;
+      }
+    }
+    
+    // Giảm tốc độ trôi (Friction)
+    pt.vx *= 0.98;
+    pt.vy = pt.vy * 0.98 - 0.02;
+
+    pt.x += pt.vx;
+    pt.y += pt.vy;
+    pt.life -= 0.001;
+    if (pt.life <= 0 || pt.y < -10 || pt.x < -10 || pt.x > W + 10) {
+      ambientParticles.splice(i, 1);
+      continue;
+    }
+    ctx.globalAlpha = pt.life;
+    ctx.fillStyle = pt.color;
+    ctx.shadowColor = pt.color;
+    ctx.beginPath();
+    ctx.arc(pt.x, pt.y, pt.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1.0;
+  ctx.shadowBlur = 0;
+
+  // Collision/Explosion Particles
   if (!vfxParticles || vfxParticles.length === 0) return;
-  for(let i=vfxParticles.length-1; i>=0; i--) {
-    const p = vfxParticles[i];
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += 0.3; // gravity
-    p.life -= 0.03;
-    if(p.life <= 0) {
+  for (let i = vfxParticles.length - 1; i >= 0; i--) {
+    const pt = vfxParticles[i];
+    pt.x += pt.vx;
+    pt.y += pt.vy;
+    pt.vy += 0.22; // gravity effect
+    pt.life -= 0.025;
+    if (pt.life <= 0) {
       vfxParticles.splice(i, 1);
       continue;
     }
-    ctx.globalAlpha = p.life;
-    ctx.fillStyle = p.color;
-    ctx.shadowColor = p.color;
-    ctx.shadowBlur = 10;
+    ctx.globalAlpha = pt.life;
+    ctx.fillStyle = pt.color;
+    ctx.shadowColor = pt.color;
+    ctx.shadowBlur = 8;
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.life * 4, 0, Math.PI*2);
+    ctx.arc(pt.x, pt.y, pt.life * 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1.0;
+  ctx.shadowBlur = 0;
+
+  // Draw Quantum Cursor Glow
+  if (mouseX > 0 && mouseY > 0) {
+    const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 80);
+    grad.addColorStop(0, 'rgba(0, 240, 255, 0.15)');
+    grad.addColorStop(1, 'rgba(0, 240, 255, 0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(mouseX - 80, mouseY - 80, 160, 160);
+  }
+}
+
+// ── Motion Trails Logic ──
+function addTrail(x, y, color) {
+  trails.push({ x, y, color, life: 1.0 });
+  if (trails.length > 50) trails.shift();
+}
+
+function drawTrails() {
+  if (trails.length === 0) return;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  for (let i = trails.length - 1; i >= 0; i--) {
+    const t = trails[i];
+    t.life -= 0.04;
+    if (t.life <= 0) {
+      trails.splice(i, 1);
+      continue;
+    }
+    ctx.globalAlpha = t.life;
+    ctx.beginPath();
+    ctx.arc(t.x, t.y, t.life * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = t.color;
+    ctx.shadowColor = t.color;
+    ctx.shadowBlur = 10 * t.life;
     ctx.fill();
   }
   ctx.globalAlpha = 1.0;
   ctx.shadowBlur = 0;
 }
+
+// ── Live HUD Logic ──
+function drawHUD(x, y, dataLines) {
+  ctx.font = '11px "JetBrains Mono"';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+  ctx.textAlign = 'left';
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+  ctx.shadowBlur = 4;
+  dataLines.forEach((line, idx) => {
+    ctx.fillText(line, x + 15, y - 10 + idx * 14);
+  });
+  ctx.shadowBlur = 0;
+}
+
+// ── Initial Start trigger ──
+renderUI();
+initPhysics();
+requestAnimationFrame(render);

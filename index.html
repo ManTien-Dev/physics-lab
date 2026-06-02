@@ -7,34 +7,39 @@
   <title>Physics Lab ⚛️ | Premium Simulation</title>
   <meta name="description"
     content="Mô phỏng vật lý tương tác — Ném xiên, Con lắc, Va chạm đàn hồi, Khí lý tưởng, Chu trình Carnot">
+  
+  <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- KaTeX for beautiful math equations -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 
 <body>
 
-  <!-- Abstract Glowing Background -->
-  <div class="bg-glow" aria-hidden="true">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="grid-overlay"></div>
+  <!-- Deep Space Sci-Fi Background -->
+  <div class="deep-space-bg" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="nebula-dust"></div>
+    <div class="glow-orb orb-cyan"></div>
+    <div class="glow-orb orb-purple"></div>
+    <div class="glow-orb orb-pink"></div>
   </div>
 
   <div class="app">
 
-    <!-- Sidebar -->
-    <aside class="sidebar glass-panel" id="sidebar">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
       <div class="brand">
-        <div class="brand-icon-wrap glow-cyan">
-          <span class="brand-icon">⚛️</span>
+        <div class="brand-logo">
+          <span class="logo-symbol">⚛️</span>
         </div>
         <div>
           <div class="brand-title">Physics Lab</div>
-          <div class="brand-sub">Premium Edition</div>
+          <div class="brand-sub">SaaS Bento Edition</div>
         </div>
       </div>
 
@@ -64,17 +69,21 @@
         </button>
       </nav>
 
+      <!-- Sidebar Footer and Credit -->
       <div class="sidebar-footer">
-        <div class="credit">TIEN VAN MAN · PHYS 101</div>
+        <div class="credit">
+          <span class="credit-author">TIEN VAN MAN</span>
+          <span class="credit-course">PHYS 101 · 2026</span>
+        </div>
       </div>
     </aside>
 
-    <!-- Main Content -->
+    <!-- Main Content Area -->
     <main class="main">
 
-      <!-- Topbar -->
-      <div class="topbar glass-panel">
-        <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <!-- Header / Top Bar -->
+      <div class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">
           <span></span><span></span><span></span>
         </button>
         <div class="topbar-info">
@@ -85,62 +94,115 @@
         </div>
         <div class="topbar-actions">
           <div class="speed-control">
-            <label for="speedSlider">⚡ Tốc độ</label>
-            <input type="range" id="speedSlider" min="0.1" max="5" step="0.1" value="1" class="neon-slider">
+            <span class="control-label">⚡ Tốc độ</span>
+            <div class="slider-wrapper">
+              <input type="range" id="speedSlider" min="0.1" max="5" step="0.1" value="1" class="sleek-slider">
+            </div>
             <span id="speedValue" class="speed-badge">1.0×</span>
           </div>
-          <button class="action-btn btn-neon-purple" id="btnPause">
-            <span id="pauseIcon" style="font-family: 'JetBrains Mono', monospace;">||</span>
+          <button class="action-btn btn-secondary" id="btnZenMode" title="Mở rộng không gian mô phỏng (Zen Mode)">
+            <span class="mono-icon">🔲</span> Zen Mode
+          </button>
+          <button class="action-btn btn-primary" id="btnPause">
+            <span id="pauseIcon" class="mono-icon">⏸</span>
             <span id="pauseText">Tạm dừng</span>
           </button>
-          <button class="action-btn btn-neon-red" id="btnReset">
-            <span style="font-family: 'JetBrains Mono', monospace;">↺</span> Đặt lại
+          <button class="action-btn btn-secondary" id="btnReset">
+            <span class="mono-icon">↺</span> Đặt lại
           </button>
         </div>
       </div>
 
-      <!-- Workspace -->
+      <!-- Bento Workspace Layout -->
       <div class="workspace">
 
-        <!-- Control Panel -->
-        <div class="control-panel glass-panel" id="controlPanel">
-          <div class="panel-title">📐 LÝ THUYẾT & CÔNG THỨC</div>
-          <div class="equation-box glow-box" id="equationBox"></div>
+        <!-- Left Column: Settings and Dashboard Controls -->
+        <div class="workspace-sidebar">
+          
+          <!-- Equation Bento Card -->
+          <div class="bento-card equation-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <span class="card-icon">📐</span>
+                <span class="card-title">Công thức quỹ đạo</span>
+              </div>
+              <button class="copy-btn" id="btnCopyMath" title="Sao chép công thức LaTeX">
+                <span class="copy-icon">📋</span>
+                <span class="toast-tip" id="copyToast">Đã chép!</span>
+              </button>
+            </div>
+            <div class="equation-box" id="equationBox"></div>
+          </div>
 
-          <div class="panel-title">🎛️ THÔNG SỐ ĐẦU VÀO</div>
-          <div class="params-list" id="paramsList"></div>
+          <!-- Controls Bento Card -->
+          <div class="bento-card controls-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <span class="card-icon">🎛️</span>
+                <span class="card-title">Tham số điều chỉnh</span>
+              </div>
+            </div>
+            <div class="params-list" id="paramsList"></div>
+          </div>
 
-          <div class="panel-title">📊 KẾT QUẢ MÔ PHỎNG</div>
-          <div class="stats-box" id="statsBox"></div>
+          <!-- Stats Bento Card -->
+          <div class="bento-card stats-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <span class="card-icon">📊</span>
+                <span class="card-title">Kết quả đo đạc</span>
+              </div>
+            </div>
+            <div class="stats-box" id="statsBox"></div>
+          </div>
 
-          <div class="theory-box" id="theoryBox"></div>
         </div>
 
-        <!-- Monitor / Visualization -->
-        <div class="viz-panel">
-          <!-- Glass Canvas Frame -->
-          <div class="glass-canvas-wrap glow-panel">
+        <!-- Right Column: Canvas Render & Theory Card -->
+        <div class="workspace-main">
+
+          <!-- Simulation Monitor Card -->
+          <div class="bento-card viz-card">
             <div class="canvas-header">
-              <div class="window-controls">
-                <span class="dot dot-r"></span>
-                <span class="dot dot-y"></span>
-                <span class="dot dot-g"></span>
+              <div class="window-indicators">
+                <span class="indicator-dot dot-red"></span>
+                <span class="indicator-dot dot-yellow"></span>
+                <span class="indicator-dot dot-green"></span>
               </div>
               <div class="canvas-title" id="monitorTitle">SIMULATION ENGINE</div>
-              <div class="window-controls-placeholder"></div>
+              <div class="canvas-status">
+                <span class="status-dot pulsing"></span>
+                <span class="status-label">ACTIVE</span>
+              </div>
             </div>
             <div class="canvas-container">
               <canvas id="canvas"></canvas>
             </div>
           </div>
+
+          <!-- Theory and Verification Card -->
+          <div class="bento-card theory-card">
+            <div class="card-header">
+              <div class="card-title-wrap">
+                <span class="card-icon">📖</span>
+                <span class="card-title">Phân tích lý thuyết & Kiểm chứng</span>
+              </div>
+            </div>
+            <div class="theory-scroll-container">
+              <div class="theory-box" id="theoryBox"></div>
+            </div>
+          </div>
+
         </div>
 
       </div>
     </main>
   </div>
 
+  <!-- Loaded Libraries & Application Code -->
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script src="app.js?v=3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="app.js?v=5"></script>
 </body>
 
 </html>
